@@ -1,0 +1,1365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<!-- Remove noindex once testimonials, logos and pricing are real -->
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Signal by Flywheel: listen, engage and post from one place</title>
+<meta name="description" content="Signal watches every conversation about your market, drafts replies in your voice and ships your posts on time." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%230a0a0a%22%2F%3E%3Cg%20fill%3D%22%23fff%22%20transform%3D%22translate(4%204)%20scale(1)%22%3E%3Crect%20x%3D%2210%22%20y%3D%221.2%22%20width%3D%224%22%20height%3D%222.2%22%20rx%3D%22.4%22%20opacity%3D%22.22%22%2F%3E%3Crect%20x%3D%229.5%22%20y%3D%224.6%22%20width%3D%225%22%20height%3D%223%22%20rx%3D%22.5%22%20opacity%3D%22.4%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%228.9%22%20width%3D%226%22%20height%3D%223.8%22%20rx%3D%22.6%22%20opacity%3D%22.65%22%2F%3E%3Crect%20x%3D%227.6%22%20y%3D%2214%22%20width%3D%228.8%22%20height%3D%228.8%22%20rx%3D%221.1%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Syne:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #0a0a0a;
+    --muted: #737373;
+    --muted-2: #a3a3a3;
+    --border: #e5e5e5;
+    --card: #fafafa;
+    --card-2: #f5f5f5;
+    --ink-soft: #303030;
+    --display: "Syne", "Geist", Arial, sans-serif;
+    --sans: "Geist", Inter, ui-sans-serif, system-ui, sans-serif;
+    --mono: "Geist Mono", ui-monospace, monospace;
+    --max: 1180px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  svg { display: block; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 30px; }
+  .mono { font-family: var(--mono); font-size: 12px; letter-spacing: -0.1px; }
+  .muted { color: var(--muted); }
+  .display { font-family: var(--display); letter-spacing: -0.88px; line-height: 1; }
+  .h2 { font-family: var(--display); font-size: 36px; font-weight: 500; letter-spacing: -0.6px; line-height: 1.1; color: var(--muted); max-width: 820px; text-wrap: balance; }
+  .h2 b { color: var(--fg); font-weight: 600; }
+  section { position: relative; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: 999px; font-size: 14px; font-weight: 500; white-space: nowrap; transition: transform .15s, background .2s, box-shadow .2s; }
+  .btn:active { transform: scale(.98); }
+  .btn-ghost { background: rgba(10,10,10,.03); box-shadow: 0 0 0 1px rgba(10,10,10,.1), 0 1px 2px rgba(0,0,0,.06); }
+  .btn-ghost:hover { background: rgba(10,10,10,.06); }
+  .btn-sm { height: 34px; padding: 0 14px; font-size: 13px; }
+  /* Primary: black pill with a light sweeping round its border (inverted "star button") */
+  .btn-star { position: relative; isolation: isolate; overflow: hidden; color: #fff; background: var(--fg); }
+  .btn-star::before { content: ""; position: absolute; inset: -150%; z-index: -2; background: conic-gradient(from 0deg, transparent 0 300deg, #d4d4d4 340deg, transparent 360deg); animation: spin 3s linear infinite; }
+  .btn-star::after { content: ""; position: absolute; inset: 1.5px; z-index: -1; border-radius: inherit; background: var(--fg); }
+  .btn-star:hover::after { background: #1f1f1f; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Nav */
+  nav.top { position: fixed; top: 12px; left: 30px; right: 30px; z-index: 50; }
+  nav.top .bar { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 8px 8px 8px 18px; border-radius: 18px; transition: background .25s, box-shadow .25s, backdrop-filter .25s; }
+  nav.top.scrolled .bar { background: rgba(255,255,255,.8); backdrop-filter: blur(14px); box-shadow: 0 0 0 1px var(--border), 0 8px 24px -12px rgba(0,0,0,.12); }
+  .logo { display: flex; align-items: center; gap: 9px; font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -0.4px; }
+  .logo-mark { width: 26px; height: 26px; border-radius: 8px; background: var(--fg); display: grid; place-items: center; }
+  .logo-mark rect { transition: transform .35s ease; }
+  .logo:hover .logo-mark rect:not(:last-child) { transform: translateY(2px); }
+  .logo small { font-family: var(--sans); font-weight: 400; font-size: 13px; color: var(--muted); letter-spacing: 0; }
+  .links { display: flex; gap: 26px; font-size: 14px; color: var(--muted); }
+  .links a:hover { color: var(--fg); }
+  .nav-cta { display: flex; gap: 8px; align-items: center; }
+  .nav-cta .signin { font-size: 14px; color: var(--muted); padding: 0 10px; }
+  .nav-cta .signin:hover { color: var(--fg); }
+
+  /* Hero */
+  .hero { overflow: hidden; }
+  .morning { padding: 80px 0 20px; }
+  .morning .app { margin-top: 40px; }
+
+  /* Bit-stream hero: canvas covers the whole hero from the top of the page */
+  .hero { height: max(760px, 100vh); height: max(760px, 100svh); padding: 150px 0 0; }
+  #bits { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .hero > .wrap { position: relative; z-index: 2; }
+  .pipe-hint { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .hint-dot { width: 6px; height: 6px; border-radius: 1px; background: var(--fg); animation: hintPulse 1.2s steps(2) infinite; }
+  @keyframes hintPulse { 50% { opacity: .2; } }
+  .net { position: absolute; left: 0; top: 0; z-index: 2; width: 44px; height: 44px; border-radius: 12px; background: #fff; color: var(--fg); box-shadow: 0 0 0 1px var(--border), 0 10px 24px -14px rgba(0,0,0,.35); display: grid; place-items: center; }
+  .net svg { width: 20px; height: 20px; }
+  .net span { position: absolute; top: 50px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 10.5px; color: var(--muted); white-space: nowrap; background: rgba(255,255,255,.9); padding: 1px 5px; border-radius: 4px; }
+  .net::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; box-shadow: 0 0 0 1px var(--fg); opacity: 0; }
+  .net.hit::after { animation: ring .9s ease-out; }
+  /* Brand colour when the badge or its stream is hovered */
+  .net { transition: color .25s, background .25s, box-shadow .25s; }
+  .net svg { transition: transform .25s; }
+  .net.on { color: var(--brand); box-shadow: 0 0 0 1px color-mix(in srgb, var(--brand) 40%, transparent), 0 12px 28px -12px color-mix(in srgb, var(--brand) 55%, transparent); }
+  .net.on svg { transform: scale(1.08); }
+  .net.on span { color: var(--brand); }
+  .net[aria-label="LinkedIn"] { --brand: #0A66C2; }
+  .net[aria-label="Reddit"] { --brand: #FF4500; }
+  .net[aria-label="News"] { --brand: #D97706; }
+  /* The last badge cycles through RSS sources to show the long tail */
+  .net.cycle .cy { display: grid; place-items: center; font-style: normal; transition: opacity .2s, transform .2s; }
+  .net.cycle span { transition: opacity .2s; }
+  .net.cycle.swap .cy { opacity: 0; transform: translateY(-6px); }
+  .net.cycle.swap span { opacity: 0; }
+  .net[aria-label="X"] { --brand: #000000; }
+  .net[aria-label="X"].on { background: #000; color: #fff; }
+  .net[aria-label="X"].on span { color: var(--fg); }
+  .net[aria-label="YouTube"] { --brand: #FF0000; }
+  .net[aria-label="Instagram"] { --brand: #E1306C; }
+  .net[aria-label="Instagram"].on { color: #fff; background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+  .hub { position: absolute; left: 50%; bottom: 64px; width: 88px; height: 88px; margin-left: -44px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px var(--border), 0 18px 40px -16px rgba(0,0,0,.3); display: grid; place-items: center; z-index: 2; transition: transform .2s; }
+  .hub.hit { transform: scale(1.06); }
+  .hub-logo { width: 42px; height: 42px; }
+  .hub-logo svg { width: 100%; height: 100%; fill: var(--fg); }
+  .hub-ring { position: absolute; inset: -1px; border-radius: 50%; box-shadow: 0 0 0 1px var(--fg); opacity: 0; }
+  .hub.hit .hub-ring { animation: ring .9s ease-out; }
+  @keyframes ring { from { opacity: .6; transform: scale(1); } to { opacity: 0; transform: scale(1.9); } }
+  .pulse-pill { display: inline-flex; align-items: center; gap: 10px; padding: 5px 12px 5px 6px; border-radius: 999px; box-shadow: 0 0 0 1px var(--border); background: #fff; font-size: 13px; color: var(--ink-soft); }
+  .pulse-pill .dot { width: 20px; height: 20px; border-radius: 50%; background: var(--fg); display: grid; place-items: center; }
+  .pulse-pill .dot i { width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: ping 1.8s ease-out infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,.8); } 100% { box-shadow: 0 0 0 7px rgba(255,255,255,0); } }
+  .hero h1 { font-size: 54px; font-weight: 500; text-align: center; max-width: 820px; margin: 22px auto 0; text-wrap: balance; }
+  .hero p.lede { text-align: center; max-width: 600px; margin: 20px auto 0; font-size: 17px; color: var(--muted); text-wrap: pretty; }
+  .hero .ctas { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* App window mock */
+  .app { margin: 56px auto 0; max-width: 1060px; border-radius: 20px; background: var(--card); box-shadow: 0 0 0 1px var(--border), 0 40px 80px -40px rgba(0,0,0,.25); overflow: hidden; }
+  .app-chrome { display: flex; align-items: center; gap: 6px; padding: 12px 14px; border-bottom: 1px solid var(--border); background: #fff; }
+  .app-chrome i { width: 10px; height: 10px; border-radius: 50%; background: #e5e5e5; }
+  .app-chrome .mono { margin-left: 10px; color: var(--muted-2); }
+  .app-body { display: grid; grid-template-columns: 220px 1fr 300px; min-height: 440px; }
+  .side { padding: 14px 10px; border-right: 1px solid var(--border); }
+  .side h6 { font-family: var(--mono); font-weight: 400; font-size: 11px; color: var(--muted-2); padding: 12px 10px 6px; }
+  .side a { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; border-radius: 8px; font-size: 13px; color: var(--ink-soft); }
+  .side a.on { background: rgba(10,10,10,.06); color: var(--fg); font-weight: 500; }
+  .side a span.n { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .feed { padding: 6px 0; background: #fff; }
+  .feed-head { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .feed-head b { font-weight: 500; font-size: 14px; }
+  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 6px; background: var(--card-2); font-family: var(--mono); font-size: 11px; color: var(--ink-soft); }
+  .chip.dark { background: var(--fg); color: #fff; }
+  .item { display: grid; grid-template-columns: 30px 1fr auto; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #f0f0f0; }
+  .item.on { background: rgba(10,10,10,.035); }
+  .av { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, #d4d4d4, #a3a3a3); display: grid; place-items: center; font-size: 11px; font-weight: 600; color: #fff; }
+  .av.b { background: linear-gradient(135deg, #525252, #171717); }
+  .av.c { background: linear-gradient(135deg, #e5e5e5, #737373); }
+  .item .who { font-size: 13px; font-weight: 500; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .item .who em { font-style: normal; font-weight: 400; color: var(--muted); }
+  .item p { font-size: 13px; color: var(--ink-soft); margin-top: 3px; }
+  .item mark { background: #ececec; color: var(--fg); padding: 0 3px; border-radius: 3px; }
+  .score { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; }
+  .score b { display: block; font-size: 15px; color: var(--fg); font-weight: 500; }
+  .draft { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .draft h5 { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .step { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; color: var(--ink-soft); }
+  .step .ck { width: 18px; height: 18px; border-radius: 50%; background: var(--fg); flex: none; display: grid; place-items: center; margin-top: 1px; }
+  .step .ck.idle { background: #fff; box-shadow: inset 0 0 0 1.5px #d4d4d4; }
+  .bubble { background: #fff; border-radius: 12px 12px 12px 4px; box-shadow: 0 0 0 1px var(--border); padding: 12px; font-size: 12.5px; color: var(--ink-soft); }
+  .typing::after { content: "|"; animation: blink 1s steps(1) infinite; color: var(--muted); }
+  @keyframes blink { 50% { opacity: 0; } }
+  .row-btns { display: flex; gap: 6px; }
+  .mini { height: 28px; padding: 0 12px; border-radius: 8px; font-size: 12px; font-weight: 500; box-shadow: 0 0 0 1px var(--border); background: #fff; }
+  .mini.dark { background: var(--fg); color: #fff; box-shadow: none; }
+
+  /* Intro + numbered cards */
+  .intro { padding: 120px 0 110px; overflow: hidden; }
+  /* Horizontal bit wave flowing behind the four cards */
+  .wave-wrap { position: relative; margin-top: 48px; }
+  .wave-wrap .cards4 { margin-top: 0; position: relative; z-index: 1; }
+  #wave { position: absolute; top: -90px; height: calc(100% + 180px); left: 50%; width: 100vw; transform: translateX(-50%); z-index: 0; pointer-events: none; }
+  .wave-wrap .card { background: rgba(250,250,250,.9); }
+  .wave-wrap .card:hover { background: rgba(245,245,245,.95); }
+  .wave-wrap .card .ic { z-index: 1; }
+  .card .ic { position: relative; }
+  .card .ic::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; box-shadow: 0 0 0 1px var(--fg); opacity: 0; }
+  .card .ic.hit { animation: icHit .9s ease-out; }
+  .card .ic.hit::after { animation: ring .9s ease-out; }
+  @keyframes icHit { 0% { background: var(--fg); color: #fff; } 100% { background: #fff; color: var(--fg); } }
+  .cards4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+  .card { background: var(--card); border-radius: 16px; padding: 22px; box-shadow: inset 0 0 0 1px var(--border); min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; transition: background .2s, transform .2s; }
+  .card:hover { background: var(--card-2); transform: translateY(-2px); }
+  .card .num { font-family: var(--mono); font-size: 12px; color: var(--muted-2); }
+  .card h3 { font-size: 18px; font-weight: 500; letter-spacing: -0.3px; margin-top: 6px; }
+  .card p { font-size: 13.5px; color: var(--muted); margin-top: 8px; }
+  .card .ic { width: 38px; height: 38px; border-radius: 11px; background: #fff; box-shadow: 0 0 0 1px var(--border); display: grid; place-items: center; }
+
+  /* Showcase tabs */
+  .showcase { padding: 100px 0 40px; }
+  .tabs { display: inline-flex; gap: 2px; padding: 4px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--border); margin-top: 32px; background: var(--card); flex-wrap: wrap; }
+  .tabs button { height: 36px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--muted); transition: background .2s, color .2s; }
+  .tabs button[aria-selected="true"] { background: var(--fg); color: #fff; }
+  .stage { margin-top: 22px; border-radius: 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--border); padding: 28px; min-height: 440px; display: grid; grid-template-columns: 1fr 1.35fr; gap: 28px; align-items: center; }
+  .panel { display: none; }
+  .panel.on { display: contents; }
+  .stage .copy h3 { font-family: var(--display); font-size: 28px; font-weight: 500; letter-spacing: -0.5px; line-height: 1.1; }
+  .stage .copy p { color: var(--muted); margin-top: 12px; max-width: 380px; }
+  .stage .copy ul { list-style: none; margin-top: 20px; display: grid; gap: 10px; font-size: 14px; }
+  .stage .copy li { display: flex; gap: 10px; align-items: center; }
+  .stage .copy li::before { content: ""; width: 6px; height: 6px; border-radius: 2px; background: var(--fg); }
+  .mock { background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px var(--border), 0 24px 50px -30px rgba(0,0,0,.25); overflow: hidden; animation: rise .5s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+  .mock-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 500; }
+  .kw { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+  .kw span { padding: 4px 10px; border-radius: 999px; font-size: 12px; box-shadow: 0 0 0 1px var(--border); }
+  .kw span.add { color: var(--muted); box-shadow: 0 0 0 1px var(--border) inset; border: 1px dashed #d4d4d4; box-shadow: none; }
+  .bars { display: flex; align-items: flex-end; gap: 5px; height: 90px; padding: 0 16px 14px; }
+  .bars i { flex: 1; background: #e5e5e5; border-radius: 3px 3px 1px 1px; }
+  .bars i.hi { background: var(--fg); }
+  .post { padding: 16px; display: grid; gap: 12px; }
+  .post-src { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+  .post-src em { font-style: normal; color: var(--muted); }
+  .post-body { font-size: 13.5px; color: var(--ink-soft); }
+  .reply { margin-left: 22px; border-left: 2px solid var(--border); padding-left: 14px; display: grid; gap: 10px; }
+  .voice { display: flex; gap: 6px; flex-wrap: wrap; }
+  .cal { display: grid; grid-template-columns: repeat(5, 1fr); }
+  .cal div { border-right: 1px solid #f0f0f0; padding: 10px 8px; min-height: 230px; display: flex; flex-direction: column; gap: 6px; }
+  .cal div:last-child { border-right: 0; }
+  .cal h6 { font-family: var(--mono); font-weight: 400; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .slot { border-radius: 8px; padding: 7px 8px; font-size: 11.5px; background: var(--card-2); line-height: 1.3; }
+  .slot b { display: block; font-family: var(--mono); font-weight: 400; font-size: 10.5px; color: var(--muted); margin-bottom: 2px; }
+  .slot.dark { background: var(--fg); color: #fff; }
+  .slot.dark b { color: #a3a3a3; }
+  .slot.line { background: #fff; box-shadow: inset 0 0 0 1px var(--border); }
+
+  /* Bullets + split */
+  .bullets { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 70px; border-top: 1px solid var(--border); }
+  .bullets div { padding: 22px 22px 0 0; }
+  .bullets h4 { font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .bullets p { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+  .split { padding: 120px 0 40px; }
+  .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 48px; }
+  .tile { background: var(--card); border-radius: 20px; box-shadow: inset 0 0 0 1px var(--border); padding: 26px; min-height: 360px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+  .tile h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.3px; }
+  .tile p { color: var(--muted); margin-top: 6px; font-size: 14px; max-width: 420px; }
+  .timer { font-family: var(--display); font-size: 84px; font-weight: 500; letter-spacing: -3px; line-height: 1; }
+  .approve { background: #fff; border-radius: 14px; box-shadow: 0 0 0 1px var(--border), 0 18px 40px -28px rgba(0,0,0,.3); padding: 14px; display: grid; gap: 10px; max-width: 380px; }
+  .approve .meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+  .alerts { display: grid; gap: 10px; }
+  .alert { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; background: #fff; border-radius: 12px; box-shadow: 0 0 0 1px var(--border); padding: 12px 14px; animation: rise .6s ease both; }
+  .alert:nth-child(2) { animation-delay: .12s; margin-left: 18px; }
+  .alert:nth-child(3) { animation-delay: .24s; margin-left: 36px; }
+  .alert .ic { width: 34px; height: 34px; border-radius: 10px; background: var(--card-2); display: grid; place-items: center; }
+  .alert b { font-size: 13px; font-weight: 500; display: block; }
+  .alert span { font-size: 12.5px; color: var(--muted); }
+
+  /* Sources */
+  .sources { padding: 100px 0 40px; text-align: center; }
+  .sources .h2 { margin: 0 auto; }
+  .src-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 36px; }
+  .src { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 10px; border-radius: 14px; box-shadow: inset 0 0 0 1px var(--border); background: #fff; font-size: 14px; font-weight: 500; }
+  .src .ic { width: 30px; height: 30px; border-radius: 9px; background: var(--brand, var(--fg)); color: #fff; display: grid; place-items: center; }
+  .src .ic svg { width: 16px; height: 16px; }
+  .src-note { margin-top: 22px; color: var(--muted); font-size: 14px; }
+  .src .ic.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+
+  /* Testimonials */
+  .quotes { padding: 110px 0 40px; overflow: hidden; }
+  .q-track { display: flex; gap: 14px; width: max-content; margin-top: 44px; animation: marquee 60s linear infinite; }
+  .q-track:hover { animation-play-state: paused; }
+  .q { width: min(86vw, 460px); flex: none; border-radius: 18px; background: var(--card); box-shadow: inset 0 0 0 1px var(--border); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 26px; }
+  .q p { font-size: 16px; line-height: 1.5; letter-spacing: -0.1px; }
+  .q .by { display: flex; gap: 12px; align-items: center; font-size: 13px; }
+  .q .by span { color: var(--muted); display: block; }
+  .logos { display: flex; justify-content: center; gap: 56px; flex-wrap: wrap; margin-top: 60px; font-family: var(--display); font-size: 20px; font-weight: 600; color: #c4c4c4; letter-spacing: -0.4px; }
+
+  /* Pricing */
+  .pricing { padding: 120px 0 40px; }
+  .p-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+  .toggle { display: inline-flex; padding: 4px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--border); background: var(--card); }
+  .toggle button { padding: 6px 14px; border-radius: 999px; font-size: 13px; color: var(--muted); }
+  .toggle button.on { background: var(--fg); color: #fff; }
+  .toggle .save { font-family: var(--mono); font-size: 11px; margin-left: 4px; opacity: .7; }
+  .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
+  .plan { border-radius: 18px; padding: 22px; background: #fff; box-shadow: inset 0 0 0 1px var(--border); display: flex; flex-direction: column; gap: 18px; }
+  .plan.hot { background: var(--fg); color: #fff; box-shadow: none; }
+  .plan.hot .muted, .plan.hot li { color: #a3a3a3; }
+  .plan h3 { font-size: 16px; font-weight: 500; }
+  .price { font-family: var(--display); font-size: 40px; font-weight: 500; letter-spacing: -1px; line-height: 1; }
+  .price small { font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+  .plan ul { list-style: none; display: grid; gap: 9px; font-size: 13.5px; color: var(--ink-soft); flex: 1; }
+  .plan li { display: flex; gap: 9px; align-items: flex-start; }
+  .plan li svg { flex: none; margin-top: 3px; }
+  .plan .btn { width: 100%; }
+  .plan.hot .btn-ghost { background: #fff; color: var(--fg); }
+
+  /* FAQ */
+  .faq { padding: 120px 0 40px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; }
+  details { border-bottom: 1px solid var(--border); }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 0; font-size: 16px; font-weight: 500; }
+  summary::-webkit-details-marker { display: none; }
+  summary .pm { width: 22px; height: 22px; position: relative; flex: none; }
+  summary .pm::before, summary .pm::after { content: ""; position: absolute; left: 5px; right: 5px; top: 10px; height: 1.5px; background: var(--muted); transition: transform .25s; }
+  summary .pm::after { transform: rotate(90deg); }
+  details[open] summary .pm::after { transform: rotate(0); }
+  details p { padding: 0 40px 22px 0; color: var(--muted); font-size: 14.5px; }
+
+  /* Closing CTA */
+  .closing { padding: 140px 0; text-align: center; overflow: hidden; }
+  .closing .glow { position: absolute; left: 50%; top: 50%; width: 900px; height: 420px; transform: translate(-50%, -50%); background: radial-gradient(closest-side, rgba(0,0,0,.08), transparent); filter: blur(30px); z-index: -1; }
+  .closing h2 { font-family: var(--display); font-size: 60px; font-weight: 600; letter-spacing: -1.6px; line-height: 1; max-width: 860px; margin: 0 auto; text-wrap: balance; }
+  .closing p { color: var(--muted); font-size: 17px; margin-top: 18px; }
+  .closing .ctas { display: flex; gap: 10px; justify-content: center; margin-top: 30px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 60px 0 30px; }
+  .f-grid { display: grid; grid-template-columns: 1.6fr repeat(5, 1fr); gap: 28px; }
+  .f-grid h6 { font-size: 13px; font-weight: 500; margin-bottom: 14px; }
+  .f-grid a { display: block; font-size: 13.5px; color: var(--muted); padding: 4px 0; }
+  .f-grid a:hover { color: var(--fg); }
+  .f-brand p { color: var(--muted); font-size: 13.5px; margin-top: 14px; max-width: 240px; }
+  .socials { display: flex; gap: 8px; margin-top: 18px; }
+  .socials a { width: 32px; height: 32px; border-radius: 9px; box-shadow: inset 0 0 0 1px var(--border); display: grid; place-items: center; padding: 0; }
+  .f-base { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); gap: 20px; flex-wrap: wrap; }
+  .f-base nav { display: flex; gap: 20px; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 1020px) {
+    .links { display: none; }
+    .app-body { grid-template-columns: 1fr; }
+    .side, .draft { display: none; }
+    .cards4, .bullets, .plans { grid-template-columns: repeat(2, 1fr); }
+    #wave { display: none; }
+    .stage, .split-grid, .faq { grid-template-columns: 1fr; }
+    .f-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 18px; }
+    nav.top { left: 12px; right: 12px; }
+    .nav-cta .signin { display: none; }
+    .hero h1 { font-size: 38px; }
+    .hero { height: max(780px, 100vh); height: max(780px, 100svh); }
+    .h2 { font-size: 28px; }
+    .closing h2 { font-size: 40px; }
+    .cards4, .bullets, .plans { grid-template-columns: 1fr; }
+    .cal { grid-template-columns: repeat(3, 1fr); }
+    .cal div:nth-child(n+4) { display: none; }
+    .f-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-signal" viewBox="0 0 24 24" fill="currentColor"><rect x="10" y="1.2" width="4" height="2.2" rx=".4" opacity=".22"/><rect x="9.5" y="4.6" width="5" height="3" rx=".5" opacity=".4"/><rect x="9" y="8.9" width="6" height="3.8" rx=".6" opacity=".65"/><rect x="7.6" y="14" width="8.8" height="8.8" rx="1.1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-radar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/><path d="M12 18h.01"/><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/><circle cx="12" cy="12" r="2"/><path d="m13.41 10.59 5.66-5.66"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.38 3.62a1 1 0 0 1 3 3L7.37 18.64a2 2 0 0 1-.86.5l-2.87.84a.5.5 0 0 1-.62-.62l.84-2.87a2 2 0 0 1 .5-.86z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  </defs>
+</svg>
+
+<nav class="top" id="nav">
+  <div class="bar">
+    <a href="#" class="logo">
+      <span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><rect x="10" y="1.2" width="4" height="2.2" rx=".4" opacity=".22"/><rect x="9.5" y="4.6" width="5" height="3" rx=".5" opacity=".4"/><rect x="9" y="8.9" width="6" height="3.8" rx=".6" opacity=".65"/><rect x="7.6" y="14" width="8.8" height="8.8" rx="1.1"/></svg></span>
+      Signal <small>by Flywheel</small>
+    </a>
+    <div class="links">
+      <a href="#product">Product</a>
+      <a href="#how">How it works</a>
+      <a href="#sources">Sources</a>
+      <a href="#customers">Customers</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQs</a>
+    </div>
+    <div class="nav-cta">
+      <a href="https://app.flywheelos.com" class="signin">Sign in</a>
+      <a href="#pricing" class="btn btn-star btn-sm">Try Signal</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="product">
+  <canvas id="bits" aria-hidden="true"></canvas>
+  <div class="wrap" style="text-align:center">
+    <span class="pulse-pill"><span class="dot"><i></i></span>Listening across LinkedIn, X, YouTube, podcasts, Substack, Instagram, Reddit and any RSS feed</span>
+    <h1 class="display">Hear every conversation about your market. Join the right ones.</h1>
+    <p class="lede">Signal watches your keywords, competitors and mentions, drafts replies in your voice and ships your posts on schedule.</p>
+    <div class="ctas">
+      <a href="#pricing" class="btn btn-star">Request demo</a>
+      <a href="#how" class="btn btn-ghost">See how it works <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+    </div>
+    <p class="pipe-hint"><span class="hint-dot"></span><span id="hintText">Hover the stream to find the signal</span></p>
+  </div>
+
+  <div class="net" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></div>
+  <div class="net" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.22-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg><span>X</span></div>
+  <div class="net" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg><span>YouTube</span></div>
+  <div class="net" aria-label="Podcasts" style="--brand:#9933CC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="1.4" fill="currentColor"/><path d="M11 17a1 1 0 0 1 2 0c0 .5-.34 3-.5 4.5a.5.5 0 0 1-1 0c-.16-1.5-.5-4-.5-4.5Z"/><path d="M8 14a5 5 0 1 1 8 0"/><path d="M17 18.5a9 9 0 1 0-10 0"/></svg><span>Podcasts</span></div>
+  <div class="net" aria-label="Substack" style="--brand:#FF6719"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.6H3V5.2h18v2.4zM3 9.8V21l9-5 9 5V9.8H3zM21 1H3v2.4h18V1z"/></svg><span>Substack</span></div>
+  <div class="net" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><path d="M17.5 6.5h.01"/></svg><span>Instagram</span></div>
+  <div class="net" aria-label="Reddit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14.5" rx="8" ry="5.5"/><circle cx="18" cy="4.5" r="1.5"/><path d="M12 9l1.5-5 3 .6"/><circle cx="4.6" cy="10.6" r="1.6"/><circle cx="19.4" cy="10.6" r="1.6"/><path d="M9.5 16.8c1.5 1 3.5 1 5 0"/><circle cx="9" cy="13.4" r=".6" fill="currentColor"/><circle cx="15" cy="13.4" r=".6" fill="currentColor"/></svg><span>Reddit</span></div>
+  <div class="net cycle" aria-label="News"><i class="cy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></i><span>News</span></div>
+  <div class="hub" id="hub" aria-label="Flywheel">
+    <div class="hub-ring"></div>
+    <div class="hub-logo"><svg viewBox="0 0 23.018 22.667" aria-label="Flywheel">
+          <path d="M 4.448 1.186 C 9.412 -1.598 16.505 0.685 20.293 6.29 C 24.08 11.895 23.127 18.694 18.165 21.479 C 22.385 19.113 23.194 13.33 19.975 8.567 C 16.755 3.805 10.723 1.862 6.506 4.229 C 2.286 6.598 1.477 12.377 4.694 17.142 C 7.914 21.905 13.942 23.848 18.162 21.479 C 13.197 24.266 6.104 21.98 2.317 16.375 C -1.468 10.773 -0.515 3.971 4.447 1.186 Z"/>
+          <path d="M 8.139 2.988 C 12.206 0.705 18.019 2.578 21.119 7.168 C 24.222 11.761 23.441 17.331 19.374 19.616 C 22.831 17.676 23.494 12.938 20.856 9.037 C 18.221 5.137 13.278 3.543 9.823 5.482 C 6.366 7.422 5.703 12.16 8.341 16.064 C 10.979 19.967 15.919 21.558 19.376 19.616 C 15.309 21.899 9.496 20.028 6.396 15.435 C 3.293 10.844 4.074 5.269 8.141 2.989 L 8.139 2.989 Z"/>
+          <path d="M 13.85 2.805 C 18.161 3.076 22.11 6.822 22.666 11.172 C 23.22 15.522 20.176 18.827 15.864 18.559 C 19.53 18.789 22.117 15.979 21.646 12.28 C 21.173 8.582 17.82 5.398 14.155 5.168 C 10.489 4.938 7.898 7.748 8.372 11.446 C 8.846 15.146 12.202 18.329 15.864 18.559 C 11.553 18.287 7.608 14.541 7.051 10.191 C 6.494 5.841 9.539 2.536 13.853 2.805 Z"/>
+          <path d="M 18.374 4.564 C 21.785 6.612 23.394 10.776 21.974 13.863 C 20.549 16.949 16.632 17.791 13.221 15.743 C 16.121 17.483 19.452 16.769 20.661 14.145 C 21.871 11.521 20.501 7.983 17.601 6.24 C 14.701 4.5 11.371 5.215 10.162 7.84 C 8.952 10.463 10.32 14.001 13.222 15.741 C 9.812 13.694 8.202 9.529 9.625 6.443 C 11.049 3.356 14.966 2.513 18.377 4.561 Z"/>
+        </svg></div>
+  </div>
+</section>
+
+<section class="morning">
+  <div class="wrap">
+    <h2 class="h2 reveal"><b>Then it lands in one place.</b> Ranked, drafted and ready for your yes.</h2>
+  </div>
+  <div class="wrap">
+    <div class="app reveal">
+      <div class="app-chrome"><i></i><i></i><i></i><span class="mono">app.flywheelos.com/signal</span></div>
+      <div class="app-body">
+        <aside class="side">
+          <h6>Listening</h6>
+          <a class="on" href="#">Top signals <span class="n">24</span></a>
+          <a href="#">Keywords <span class="n">12</span></a>
+          <a href="#">Competitors <span class="n">5</span></a>
+          <a href="#">Mentions <span class="n">3</span></a>
+          <h6>Engage</h6>
+          <a href="#">Reply queue <span class="n">8</span></a>
+          <a href="#">Awaiting approval <span class="n">2</span></a>
+          <h6>Publish</h6>
+          <a href="#">Calendar</a>
+          <a href="#">Drafts <span class="n">6</span></a>
+        </aside>
+        <div class="feed">
+          <div class="feed-head"><b>Top signals today</b><span class="chip">Sorted by relevance</span></div>
+          <div class="item on">
+            <div class="av b">JM</div>
+            <div><div class="who">Jordan Mills <em>Head of Growth, Northbeam</em> <span class="chip">LinkedIn</span></div>
+              <p>Anyone have a tool that actually tells you <mark>who is talking about your category</mark> before it trends? Tired of finding out a week late.</p></div>
+            <div class="score"><b>96</b>fit</div>
+          </div>
+          <div class="item">
+            <div class="av">r/</div>
+            <div><div class="who">r/SaaS <em>214 upvotes</em> <span class="chip">Reddit</span></div>
+              <p>Comparing <mark>social listening</mark> options for a 10 person B2B team. What do you use?</p></div>
+            <div class="score"><b>91</b>fit</div>
+          </div>
+          <div class="item">
+            <div class="av c">AC</div>
+            <div><div class="who">Acme Analytics <em>Competitor</em> <span class="chip">X</span></div>
+              <p>Big news: we're launching our new listening dashboard next week.</p></div>
+            <div class="score"><b>84</b>fit</div>
+          </div>
+          <div class="item">
+            <div class="av b">TC</div>
+            <div><div class="who">TechCrunch <em>2h ago</em> <span class="chip">News</span></div>
+              <p>B2B buyers now research on LinkedIn before they ever book a demo, report finds.</p></div>
+            <div class="score"><b>78</b>fit</div>
+          </div>
+        </div>
+        <div class="draft">
+          <h5><svg width="14" height="14"><use href="#i-pen"/></svg> Reply to Jordan</h5>
+          <div class="step"><span class="ck"><svg width="10" height="10" style="color:#fff"><use href="#i-check"/></svg></span>Read the thread and 41 comments</div>
+          <div class="step"><span class="ck"><svg width="10" height="10" style="color:#fff"><use href="#i-check"/></svg></span>Matched to your voice profile</div>
+          <div class="step"><span class="ck idle"></span>Waiting for your approval</div>
+          <div class="bubble typing" id="typed"></div>
+          <div class="row-btns"><button class="mini dark">Approve and post</button><button class="mini">Edit</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro cards -->
+<section class="intro" id="how">
+  <div class="wrap">
+    <h2 class="h2 reveal"><b>One loop for social.</b> Listen, engage and publish without switching tabs.</h2>
+    <div class="wave-wrap">
+    <canvas id="wave" aria-hidden="true"></canvas>
+    <div class="cards4">
+      <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-radar"/></svg></span><div><span class="num">01</span><h3>Every source watched</h3><p>Keywords, competitors and mentions across LinkedIn, X, YouTube, Instagram, Reddit and any RSS feed, ranked by how much they matter to you.</p></div></div>
+      <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-pen"/></svg></span><div><span class="num">02</span><h3>Replies in your voice</h3><p>Signal drafts comments and replies that sound like you, trained on your past posts. You approve before anything goes out.</p></div></div>
+      <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-cal"/></svg></span><div><span class="num">03</span><h3>Posts shipped on time</h3><p>Plan, schedule and cross-post from one calendar, with approvals for teams and clients built in.</p></div></div>
+      <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-trend"/></svg></span><div><span class="num">04</span><h3>Know what worked</h3><p>Reach, replies and engagement for every post and comment, so you can see which conversations were worth joining.</p></div></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- Showcase -->
+<section class="showcase">
+  <div class="wrap">
+    <h2 class="h2 reveal"><b>Built for every part of the loop.</b></h2>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="0">Listen</button>
+      <button role="tab" aria-selected="false" data-tab="1">Engage</button>
+      <button role="tab" aria-selected="false" data-tab="2">Publish</button>
+    </div>
+
+    <div class="stage">
+      <!-- Listen -->
+      <div class="panel on" data-panel="0">
+        <div class="copy">
+          <h3>Know what your market is saying before it trends.</h3>
+          <p>Track the words your buyers use, the competitors they compare you to and every mention of your brand.</p>
+          <ul><li>Keyword and boolean tracking</li><li>Competitor post monitoring</li><li>Spikes flagged as they happen</li></ul>
+        </div>
+        <div class="mock">
+          <div class="mock-head">Tracking <span class="chip">Last 14 days</span></div>
+          <div class="kw"><span>"social listening"</span><span>"LinkedIn tool"</span><span>Acme Analytics</span><span>"B2B content"</span><span class="add">+ Add keyword</span></div>
+          <div style="padding:14px 16px 6px;display:flex;justify-content:space-between;align-items:baseline"><b style="font-weight:500;font-size:13px">Mentions</b><span class="mono muted">1,284 total, up 38%</span></div>
+          <div class="bars"><i style="height:30%"></i><i style="height:42%"></i><i style="height:35%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:38%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:60%"></i><i style="height:52%"></i><i class="hi" style="height:96%"></i><i style="height:70%"></i><i style="height:64%"></i><i style="height:72%"></i></div>
+        </div>
+      </div>
+      <!-- Engage -->
+      <div class="panel" data-panel="1">
+        <div class="copy">
+          <h3>Show up in the right threads, sounding like yourself.</h3>
+          <p>Signal picks the conversations worth joining and drafts a reply that matches your voice profile.</p>
+          <ul><li>Comment for reach on high-fit posts</li><li>Voice matched to your best posts</li><li>Approve, edit or skip in one click</li></ul>
+        </div>
+        <div class="mock">
+          <div class="post">
+            <div class="post-src"><div class="av b">PK</div><div><b style="font-weight:500">Priya Kapoor</b> <em>VP Marketing, Lumen</em></div><span class="chip" style="margin-left:auto">LinkedIn</span></div>
+            <div class="post-body">Hot take: most B2B brands post on LinkedIn and never read the comments under anyone else's posts. That's where the buyers are.</div>
+            <div class="reply">
+              <div class="voice"><span class="chip dark">Your voice</span><span class="chip">Direct</span><span class="chip">Short sentences</span><span class="chip">No hashtags</span></div>
+              <div class="bubble">Agree. We tracked it: our comments on other people's posts drove 3x the profile views our own posts did last quarter. Same effort, different room.</div>
+              <div class="row-btns"><button class="mini dark">Approve and post</button><button class="mini">Edit</button><button class="mini">Skip</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Publish -->
+      <div class="panel" data-panel="2">
+        <div class="copy">
+          <h3>One calendar for every channel.</h3>
+          <p>Write once, schedule everywhere. Signal adapts each post to the network and holds it until it's approved.</p>
+          <ul><li>LinkedIn, X and Reddit in one view</li><li>Team and client approvals</li><li>Analytics on every post</li></ul>
+        </div>
+        <div class="mock">
+          <div class="mock-head">This week <span class="chip">5 scheduled</span></div>
+          <div class="cal">
+            <div><h6>Mon 20</h6><span class="slot dark"><b>09:00 LinkedIn</b>Why we stopped gating content</span></div>
+            <div><h6>Tue 21</h6><span class="slot"><b>11:30 X</b>Thread: 5 signals buyers give off</span><span class="slot line"><b>Awaiting approval</b>Client case study</span></div>
+            <div><h6>Wed 22</h6><span class="slot"><b>08:45 LinkedIn</b>Carousel: the listening stack</span></div>
+            <div><h6>Thu 23</h6><span class="slot dark"><b>12:00 Reddit</b>AMA in r/marketing</span></div>
+            <div><h6>Fri 24</h6><span class="slot"><b>10:00 LinkedIn</b>Weekly wins</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bullets">
+      <div class="reveal"><h4><svg width="15" height="15"><use href="#i-zap"/></svg>Fast first reply</h4><p>Join a thread while it's still climbing, not a week later.</p></div>
+      <div class="reveal"><h4><svg width="15" height="15"><use href="#i-trend"/></svg>Highest fit first</h4><p>Signals are ranked by relevance, so the best ones sit on top.</p></div>
+      <div class="reveal"><h4><svg width="15" height="15"><use href="#i-msg"/></svg>Your voice, kept</h4><p>Drafts learn from what you've already written and what performed.</p></div>
+      <div class="reveal"><h4><svg width="15" height="15"><use href="#i-bell"/></svg>Always on</h4><p>Listening runs around the clock, with alerts in Slack or email.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Split: approval + alerts -->
+<section class="split">
+  <div class="wrap">
+    <h2 class="h2 reveal"><b>Autopilot where it helps.</b> You stay in control of what gets said.</h2>
+    <div class="split-grid">
+      <div class="tile reveal">
+        <div><h3>Nothing posts without a yes</h3><p>Drafts wait for you or your client. Approve from the app, from Slack or by email.</p></div>
+        <div style="display:grid;gap:18px">
+          <span class="timer" id="timer">02:41</span>
+          <div class="approve">
+            <div class="meta"><span>Reply to Priya Kapoor</span><span class="chip">Pending</span></div>
+            <div style="font-size:13px;color:var(--ink-soft)">Agree. We tracked it: our comments on other people's posts drove 3x the profile views...</div>
+            <div class="row-btns"><button class="mini dark">Approve</button><button class="mini">Request changes</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="tile reveal">
+        <div><h3>Alerts when it matters</h3><p>Signal flags the moments worth acting on, so you never miss a launch, a mention or a buyer asking for help.</p></div>
+        <div class="alerts">
+          <div class="alert"><span class="ic"><svg width="16" height="16"><use href="#i-zap"/></svg></span><div><b>Competitor launch</b><span>Acme Analytics announced a new dashboard</span></div><span class="mono muted">2m</span></div>
+          <div class="alert"><span class="ic"><svg width="16" height="16"><use href="#i-msg"/></svg></span><div><b>You were mentioned</b><span>r/SaaS thread recommends Flywheel</span></div><span class="mono muted">14m</span></div>
+          <div class="alert"><span class="ic"><svg width="16" height="16"><use href="#i-trend"/></svg></span><div><b>Topic is spiking</b><span>"LinkedIn comments" up 4x today</span></div><span class="mono muted">1h</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sources -->
+<section class="sources" id="sources">
+  <div class="wrap">
+    <h2 class="h2 reveal"><b>Listens everywhere your buyers talk.</b> Replies where it counts.</h2>
+    <div class="src-row reveal">
+      <span class="src"><span class="ic" style="--brand:#0A66C2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></span>LinkedIn</span>
+      <span class="src"><span class="ic" style="--brand:#000"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.22-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg></span>X</span>
+      <span class="src"><span class="ic" style="--brand:#FF0000"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></span>YouTube</span>
+      <span class="src"><span class="ic ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><path d="M17.5 6.5h.01"/></svg></span>Instagram</span>
+      <span class="src"><span class="ic" style="--brand:#FF4500"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14.5" rx="8" ry="5.5"/><circle cx="18" cy="4.5" r="1.5"/><path d="M12 9l1.5-5 3 .6"/><circle cx="4.6" cy="10.6" r="1.6"/><circle cx="19.4" cy="10.6" r="1.6"/><path d="M9.5 16.8c1.5 1 3.5 1 5 0"/><circle cx="9" cy="13.4" r=".6" fill="currentColor"/><circle cx="15" cy="13.4" r=".6" fill="currentColor"/></svg></span>Reddit</span>
+      <span class="src"><span class="ic" style="--brand:#FF6719"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 8.24H1.46V5.41h21.08v2.83zM1.46 10.81V24L12 18.11 22.54 24V10.81H1.46zM22.54 0H1.46v2.84h21.08V0z"/></svg></span>Substack</span>
+      <span class="src"><span class="ic" style="--brand:#000"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6.6" cy="12" r="6.2"/><ellipse cx="16.7" cy="12" rx="3.1" ry="5.8"/><ellipse cx="22" cy="12" rx="1.2" ry="5.2"/></svg></span>Medium</span>
+      <span class="src"><span class="ic" style="--brand:#FF6600"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 5l5.5 8 5.5-8M12 13v6.5"/></svg></span>Hacker News</span>
+      <span class="src"><span class="ic" style="--brand:#0085FF"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8C10.9 8.6 7.9 4.6 5.1 2.7 2.4.8 1.4 1.1.7 1.4 0 1.8 0 3 0 3.7c0 .7.4 5.6.6 6.4.8 2.7 3.6 3.6 6.2 3.3-3.8.6-7.2 2-2.8 6.9 4.9 5 6.7-1.1 7.6-4.2.9 3.1 2 9 7.5 4.2 4.2-4.2 1.2-6.3-2.7-6.9 2.6.3 5.4-.6 6.2-3.3.2-.8.6-5.7.6-6.4 0-.7-.1-1.9-.8-2.3-.7-.3-1.7-.6-4.4 1.3C16.1 4.6 13.1 8.6 12 10.8z"/></svg></span>Bluesky</span>
+      <span class="src"><span class="ic" style="--brand:#DA552F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18.5v-13h4.2a3.6 3.6 0 0 1 0 7.2H9"/></svg></span>Product Hunt</span>
+      <span class="src"><span class="ic" style="--brand:#9933CC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="1.4" fill="currentColor"/><path d="M11 17a1 1 0 0 1 2 0c0 .5-.34 3-.5 4.5a.5.5 0 0 1-1 0c-.16-1.5-.5-4-.5-4.5Z"/><path d="M8 14a5 5 0 1 1 8 0"/><path d="M17 18.5a9 9 0 1 0-10 0"/></svg></span>Podcasts</span>
+      <span class="src"><span class="ic" style="--brand:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>News and blogs</span>
+      <span class="src"><span class="ic" style="--brand:#F26522"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.2" fill="currentColor"/></svg></span>Any RSS feed</span>
+      <span class="src"><span class="ic" style="--brand:#4A154B"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg></span>Slack</span>
+      <span class="src"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg></span>MCP and API</span>
+    </div>
+    <p class="src-note reveal">Plus any newsletter, blog, profile or podcast with an RSS feed. Add the link and Signal starts listening.<br />Feeds are listen-only: they become alerts and post ideas, while replies and posts go out on your social accounts.</p>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="quotes" id="customers">
+  <div class="wrap"><h2 class="h2 reveal"><b>Teams that stopped finding out late.</b></h2></div>
+  <div class="q-track" id="qtrack">
+    <div class="q"><p>"We used to hear about competitor launches from our sales team. Now we've replied before they've finished their coffee."</p><div class="by"><div class="av b">MR</div><div>Maya Roberts<span>Head of Marketing, B2B SaaS</span></div></div></div>
+    <div class="q"><p>"The reply drafts sound like our founder. That was the bit I didn't believe until I saw it."</p><div class="by"><div class="av">JT</div><div>James Turner<span>Content Lead, Fintech</span></div></div></div>
+    <div class="q"><p>"We follow forty competitor newsletters and podcasts in one feed. Nothing slips past us now."</p><div class="by"><div class="av c">SR</div><div>Sofia Ramirez<span>Growth Manager, DevTools</span></div></div></div>
+    <div class="q"><p>"We run eight client accounts from one calendar, with approvals that actually get answered."</p><div class="by"><div class="av b">LC</div><div>Leo Carter<span>Founder, LinkedIn agency</span></div></div></div>
+  </div>
+  <div class="wrap"><div class="logos reveal"><span>Northbeam</span><span>Lumen</span><span>Kadence</span><span>Halcyon</span><span>Arcwise</span><span>Tidal</span></div></div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="p-head">
+      <h2 class="h2 reveal"><b>Plans for every team.</b> Start listening today.</h2>
+      <div class="toggle"><button class="on" data-bill="m">Monthly</button><button data-bill="a">Annual <span class="save">-20%</span></button></div>
+    </div>
+    <div class="plans">
+      <div class="plan reveal">
+        <div><h3>Starter</h3><p class="muted" style="font-size:13px">For solo founders and creators</p></div>
+        <div class="price" data-m="49" data-a="39">$49<small> /mo</small></div>
+        <ul>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>10 tracked keywords</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>LinkedIn and X listening</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Reply drafts in your voice</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Post scheduling</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Try Signal</a>
+      </div>
+      <div class="plan hot reveal">
+        <div><h3>Growth</h3><p class="muted" style="font-size:13px">For marketing teams</p></div>
+        <div class="price" data-m="149" data-a="119">$149<small> /mo</small></div>
+        <ul>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Everything in Starter</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>YouTube, Instagram, Reddit and news</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Competitor monitoring</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Post and comment analytics</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Slack alerts and approvals</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Try Signal</a>
+      </div>
+      <div class="plan reveal">
+        <div><h3>Agency</h3><p class="muted" style="font-size:13px">For teams running client accounts</p></div>
+        <div class="price" data-m="399" data-a="319">$399<small> /mo</small></div>
+        <ul>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Everything in Growth</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Multiple client workspaces</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Client approval links</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>White-label reports</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Try Signal</a>
+      </div>
+      <div class="plan reveal">
+        <div><h3>Enterprise</h3><p class="muted" style="font-size:13px">For larger brands</p></div>
+        <div class="price">Custom</div>
+        <ul>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Unlimited keywords and history</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>MCP and API access</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>SSO and audit controls</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>Dedicated support</li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap faq">
+    <header class="reveal"><h2 class="h2"><b>Questions, answered.</b></h2><p class="muted" style="margin-top:14px;max-width:340px">Can't find what you need? <a href="mailto:hello@flywheelos.com" style="color:var(--fg);text-decoration:underline">Email the team</a>.</p></header>
+    <div class="reveal">
+      <details open><summary>Which networks does Signal listen to?<span class="pm"></span></summary><p>LinkedIn, X, YouTube, Instagram and Reddit, plus anything with an RSS feed: Substack, Medium, Hacker News, Bluesky, Product Hunt, podcasts, news sites and blogs. You can track keywords, specific accounts, competitors and mentions of your brand.</p></details>
+      <details><summary>Can Signal reply on Substack, podcasts or news sites?<span class="pm"></span></summary><p>No. Feeds are listen-only. Signal reads them for competitor moves, brand mentions and trends, then turns what it finds into alerts and post ideas you can publish on your own social accounts.</p></details>
+      <details><summary>Does Signal post or comment without asking me?<span class="pm"></span></summary><p>No. Every reply and post waits for approval by default. You can approve in the app, in Slack or by email, and agencies can send approval links to clients.</p></details>
+      <details><summary>How does it learn my voice?<span class="pm"></span></summary><p>Signal reads your past posts and builds a voice profile: tone, sentence length, words you use and words you avoid. Drafts are written against that profile and get better as you edit them.</p></details>
+      <details><summary>How is this different from Flywheel?<span class="pm"></span></summary><p>Signal is the listening and engagement side of Flywheel, packaged on its own. If you already use Flywheel, Signal sits alongside your existing calendar and voice profiles.</p></details>
+      <details><summary>Can I change plans later?<span class="pm"></span></summary><p>Yes. Upgrade or downgrade any time and the change applies from your next billing period.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Closing -->
+<section class="closing">
+  <div class="glow"></div>
+  <div class="wrap">
+    <h2 class="reveal">Every conversation about your market, with a next step.</h2>
+    <p class="reveal">Set up your first listening feed in under five minutes.</p>
+    <div class="ctas reveal"><a href="#" class="btn btn-star">Talk to sales</a><a href="#pricing" class="btn btn-ghost">View pricing</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <a href="#" class="logo"><span class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><rect x="10" y="1.2" width="4" height="2.2" rx=".4" opacity=".22"/><rect x="9.5" y="4.6" width="5" height="3" rx=".5" opacity=".4"/><rect x="9" y="8.9" width="6" height="3.8" rx=".6" opacity=".65"/><rect x="7.6" y="14" width="8.8" height="8.8" rx="1.1"/></svg></span>Signal <small>by Flywheel</small></a>
+        <p>Social listening, engagement and publishing in one loop.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/company/flywheelos" aria-label="LinkedIn"><span class="mono">in</span></a>
+          <a href="https://x.com" aria-label="X"><span class="mono">X</span></a>
+        </div>
+      </div>
+      <div><h6>Product</h6><a href="#">Listening</a><a href="#">Engagement</a><a href="#">Publishing</a><a href="#">Analytics</a></div>
+      <div><h6>Solutions</h6><a href="#">Founders</a><a href="#">Marketing teams</a><a href="#">Agencies</a><a href="#">Sales teams</a></div>
+      <div><h6>Resources</h6><a href="#">Help center</a><a href="#">Guides</a><a href="#">API and MCP</a><a href="#">Contact</a></div>
+      <div><h6>Company</h6><a href="https://flywheelos.com">Flywheel</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Enterprise</a></div>
+      <div><h6>Legal</h6><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a><a href="#">Security</a></div>
+    </div>
+    <div class="f-base"><span>&copy; 2026 Flywheel. All rights reserved.</span><nav><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Sitemap</a></nav></div>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // Typed reply in hero draft panel
+  const reply = "Same problem here, Jordan. We built Signal for exactly this: it flags category conversations the day they start, not the week after. Happy to show you how we set it up.";
+  const typed = document.getElementById('typed');
+  let i = 0;
+  (function type() {
+    typed.textContent = reply.slice(0, i++);
+    if (i <= reply.length) setTimeout(type, 22);
+    else setTimeout(() => { i = 0; type(); }, 4000);
+  })();
+
+  // Showcase tabs
+  const tabs = document.querySelectorAll('[data-tab]');
+  const panels = document.querySelectorAll('[data-panel]');
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    panels.forEach((p) => p.classList.toggle('on', p.dataset.panel === t.dataset.tab));
+  }));
+
+  // Approval countdown
+  const timer = document.getElementById('timer');
+  let secs = 161;
+  setInterval(() => {
+    secs = secs <= 0 ? 161 : secs - 1;
+    timer.textContent = String(Math.floor(secs / 60)).padStart(2, '0') + ':' + String(secs % 60).padStart(2, '0');
+  }, 1000);
+
+  // Testimonial marquee: duplicate cards for a seamless loop
+  const track = document.getElementById('qtrack');
+  track.innerHTML += track.innerHTML;
+
+// Bit-stream hero: one strong stream of flickering 0s, 1s and squares per network falls from the
+// top of the page through its network badge, then the streams pinch through an hourglass neck into
+// the Flywheel hub. A few bits are signal; they look like noise until the cursor (or an autopilot
+// when idle) passes over them.
+(() => {
+  const hero = document.querySelector(".hero");
+  const cv = document.getElementById("bits");
+  const ctx = cv.getContext("2d");
+  const textBox = hero.querySelector(".wrap");
+  const hub = document.getElementById("hub");
+  const badges = [...hero.querySelectorAll(".net")]; // LinkedIn, X, YouTube, Podcasts (left), Substack, Instagram, Reddit, cycling RSS (right)
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (matchMedia("(hover: none)").matches)
+    document.getElementById("hintText").textContent =
+      "Touch the stream to find the signal";
+
+  const TYPES = [
+    ["Buying intent", 96],
+    ["Competitor launch", 88],
+    ["Brand mention", 94],
+    ["Pain point", 86],
+    ["Hiring signal", 82],
+    ["Competitor churn", 93],
+    ["Post idea", 79],
+    ["Reach play", 84],
+  ];
+  // Feed streams (Podcasts, Substack, the cycling RSS slot) are listen-only: no reply-style signals there.
+  const FEED_STREAMS = new Set([3, 4, 7]);
+  const FEED_TYPES = [
+    ["Competitor launch", 88],
+    ["Brand mention", 94],
+    ["Post idea", 79],
+    ["Trend", 83],
+    ["Industry news", 81],
+  ];
+  const SIGNAL_RATE = 0.04;
+  const TRAVEL_MS = 17000;
+  const COL = 14;
+  const MAX_W = 1512; // the template caps its hero effects at 1512px
+  const AMBIENT_SHARE = 0.08; // faint bits between the streams
+  const HALO_SHARE = 0.4; // of stream bits, the share in the faint band around the strong core
+  const CENTER_SHARE = 0.16; // faint stream down the middle, around the copy
+  // Brand colour per stream, in badge order: LinkedIn, X, YouTube, Instagram, Reddit, News.
+  const BRAND = ["#0A66C2", "#000000", "#FF0000", "#9933CC", "#FF6719", "#E1306C", "#FF4500", "#D97706"];
+  const HUB_BOTTOM = 64 + 44; // .hub bottom offset + half its height
+
+  let W,
+    H,
+    cx,
+    endY,
+    pinchAt,
+    neckK,
+    R,
+    txt,
+    copyBottom,
+    Wb,
+    left,
+    bandCols,
+    haloCols,
+    centerHalf,
+    badgeY,
+    badgeYs = [],
+    inGutter;
+  let streams = [],
+    badgeX = [],
+    parts = [],
+    sprites = {};
+  let pointer = null,
+    lastMove = -1e9,
+    speed = 1,
+    visible = true;
+  let lens = { x: 0, y: 0 };
+  // Glyph sprites are cached per colour, so each stream can carry its network's tint.
+  function sprite(ch, color = "#0a0a0a") {
+    const key = ch + color;
+    if (sprites[key]) return sprites[key];
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    const c = document.createElement("canvas");
+    c.width = c.height = 24 * dpr;
+    const g = c.getContext("2d");
+    g.scale(dpr, dpr);
+    g.fillStyle = color;
+    g.font = '500 20px "Geist Mono", ui-monospace, monospace';
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    g.fillText(ch, 12, 13);
+    return (sprites[key] = c);
+  }
+  function makeSprites() {
+    sprites = {};
+  }
+
+  // A faded version of a brand colour: mixed toward neutral grey so the streams read as tinted, not loud.
+  const tintCache = {};
+  function tint(hex) {
+    if (tintCache[hex]) return tintCache[hex];
+    const n = parseInt(hex.slice(1), 16);
+    const mix = (c, g) => Math.round(c * 0.6 + g * 0.4);
+    const r = mix((n >> 16) & 255, 120), gr = mix((n >> 8) & 255, 120), b = mix(n & 255, 120);
+    return (tintCache[hex] = "#" + ((1 << 24) | (r << 16) | (gr << 8) | b).toString(16).slice(1));
+  }
+
+  // Straight down until below the copy, then a cosine pinch to the neck.
+  const shape = (t) =>
+    t < pinchAt
+      ? 1
+      : 0.5 * (1 + Math.cos(Math.PI * ((t - pinchAt) / (1 - pinchAt))));
+  const shapeD = (t) =>
+    t < pinchAt
+      ? 0
+      : ((-0.5 * Math.PI) / (1 - pinchAt)) *
+        Math.sin(Math.PI * ((t - pinchAt) / (1 - pinchAt)));
+  const prof = (t) => shape(t) * (1 - neckK) + neckK;
+  const smooth = (a, b, x) => {
+    const k = Math.min(1, Math.max(0, (x - a) / (b - a)));
+    return k * k * (3 - 2 * k);
+  };
+
+  function reset(p, t) {
+    p.t = t;
+    p.v = 0.85 + Math.random() * 0.35;
+    p.passed = t > 0; // seeded bits start past their badge; new ones start at the top
+    const roll = Math.random();
+    if (roll < CENTER_SHARE) {
+      // Faint central stream around the copy, heaviest in the middle and fading toward the side streams.
+      const cols = Math.max(1, Math.floor(centerHalf / COL));
+      const off = (Math.floor(Math.random() * (2 * cols + 1)) - cols) * COL;
+      p.s = -1;
+      p.x0 = cx + off;
+      p.w = 0.24 * (1 - 0.6 * Math.pow(Math.abs(off) / (centerHalf || 1), 2));
+      p.sig = null;
+    } else if (roll < CENTER_SHARE + AMBIENT_SHARE) {
+      p.s = -1;
+      p.x0 = left + (Math.floor(Math.random() * (Wb / 16)) + 0.5) * 16;
+      p.w =
+        0.3 *
+        (0.1 + 0.9 * smooth(0, 90, Math.min(p.x0 - left, left + Wb - p.x0)));
+      p.sig = null;
+    } else {
+      p.s = Math.floor(Math.random() * streams.length);
+      if (Math.random() < HALO_SHARE) {
+        // Faint band either side of the core, fading out with distance.
+        const k = 1 + Math.floor(Math.random() * haloCols);
+        const side = Math.random() < 0.5 ? -1 : 1;
+        p.x0 = streams[p.s] + side * ((bandCols - 1) / 2 + k) * COL;
+        p.w = 0.34 * (1 - (k - 1) / haloCols);
+        p.sig = null;
+      } else {
+        const off =
+          (Math.floor(Math.random() * bandCols) - (bandCols - 1) / 2) * COL;
+        p.x0 = streams[p.s] + off;
+        p.w = 1 - 0.6 * Math.pow(Math.abs(off) / ((bandCols * COL) / 2), 2); // soft edges across the band
+        const pool = FEED_STREAMS.has(p.s) ? FEED_TYPES : TYPES;
+        p.sig =
+          Math.random() < SIGNAL_RATE
+            ? pool[Math.floor(Math.random() * pool.length)]
+            : null;
+      }
+    }
+    p.kind = Math.random() < 0.3 ? "sq" : Math.random() < 0.5 ? "0" : "1";
+    p.a = 0.28 + Math.random() * 0.45;
+    p.flash = 0;
+    p.next = Math.random() * 1200;
+  }
+
+  function layout() {
+    const dpr = Math.min(2, devicePixelRatio || 1);
+    W = hero.clientWidth;
+    H = hero.clientHeight;
+    cv.width = W * dpr;
+    cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cx = W / 2;
+    endY = H - HUB_BOTTOM;
+    Wb = Math.min(W - 40, MAX_W);
+    left = cx - Wb / 2;
+    bandCols = W < 700 ? 2 : 3;
+    haloCols = W < 700 ? 1 : 2;
+    const band = bandCols * COL;
+
+    const hb = hero.getBoundingClientRect();
+    const h1 = textBox.querySelector("h1").getBoundingClientRect();
+    const bottom = textBox
+      .querySelector(".pipe-hint")
+      .getBoundingClientRect().bottom;
+    copyBottom = bottom - hb.top;
+    txt = {
+      x: cx,
+      // Hug the copy block (pill to hint) so the central stream shows around it.
+      y: (h1.top - 60 + bottom) / 2 - hb.top,
+      w: h1.width / 2,
+      h: (bottom - h1.top + 60) / 2 + 12,
+    };
+
+    // Streams run down the gutters beside the copy when there is room; otherwise they spread
+    // evenly and pass quietly behind it.
+    const gStart = h1.width / 2 + 40 + band / 2,
+      gEnd = Wb / 2 - band / 2 - 10;
+    // Three streams a side, so the gutter needs room for two gaps of a band plus spacing.
+    inGutter = gEnd - gStart >= 3 * (band + 20);
+    const offs = inGutter
+      ? [0, 1 / 3, 2 / 3, 1].map((k) => gStart + (gEnd - gStart) * k)
+      : [0.08, 0.2, 0.32, 0.44].map((k) => Wb * k);
+    const inner = offs[0];
+    // Badge order: LinkedIn, X, YouTube, Podcasts (left, outer to inner), then Substack, Instagram, Reddit, RSS (right, inner to outer).
+    streams = [cx - offs[3], cx - offs[2], cx - offs[1], cx - offs[0], cx + offs[0], cx + offs[1], cx + offs[2], cx + offs[3]];
+    // The central stream fills the space between the inner streams' halos.
+    centerHalf = Math.max(COL * 3, inner - band / 2 - haloCols * COL);
+
+    pinchAt = Math.min(0.66, Math.max(0.35, (copyBottom + 30) / endY));
+    badgeY = inGutter
+      ? Math.min(endY * 0.5, pinchAt * endY - 60)
+      : copyBottom + 40;
+    if (!inGutter)
+      pinchAt = Math.min(0.8, Math.max(pinchAt, (badgeY + 60) / endY));
+    neckK = 16 / (Wb / 2);
+    R = W < 700 ? 80 : 110;
+
+    badges.forEach((b, i) => {
+      const half = badges.length / 2;
+      const by = badgeY + ((i < half ? i : badges.length - 1 - i) % 2 ? 24 : -24);
+      badgeYs[i] = by;
+      const x = cx + (streams[i] - cx) * prof(by / endY);
+      badgeX[i] = x;
+      b.style.transform = `translate(${x - 22}px, ${by - 22}px)`;
+    });
+
+    const perStream = (bandCols * endY) / 9;
+    // Capped so big screens stay smooth; density per stream is already set by bandCols.
+    const n = Math.min(
+      4200,
+      Math.round(
+        (perStream * streams.length) /
+          (1 - HALO_SHARE) /
+          (1 - AMBIENT_SHARE - CENTER_SHARE),
+      ),
+    );
+    while (parts.length < n) parts.push({});
+    parts.length = n;
+    parts.forEach((p) => reset(p, Math.random()));
+    lens = lensTarget(performance.now());
+  }
+
+  function lensTarget(now) {
+    if (pointer && now - lastMove < 2600) return pointer;
+    // Autopilot: visit each stream in turn, gliding up and down its straight section.
+    const i = Math.floor(now / 5200) % streams.length;
+    const yTop = inGutter ? 150 : copyBottom + R * 0.6,
+      yBot = pinchAt * endY - 10;
+    const y = yTop + (yBot - yTop) * (0.5 + 0.5 * Math.sin(now * 0.0005));
+    return { x: cx + (streams[i] - cx) * prof(y / endY), y };
+  }
+
+  function ping(el) {
+    el.classList.remove("hit");
+    void el.offsetWidth;
+    el.classList.add("hit");
+  }
+
+  function pill(x, y, text, alpha, color = "#0a0a0a") {
+    ctx.font = '500 10px "Geist Mono", ui-monospace, monospace';
+    const w = ctx.measureText(text).width + 12;
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.roundRect(x, y - 9, w, 18, 5);
+    ctx.fill();
+    ctx.fillStyle = "#fff";
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "left";
+    ctx.fillText(text, x + 6, y + 0.5);
+  }
+
+  let prev = performance.now();
+  function frame(now) {
+    requestAnimationFrame(frame);
+    const dt = Math.min(50, now - prev);
+    prev = now;
+    if (!visible) return;
+    const hovering = pointer && now - lastMove < 2600;
+    speed += ((reduced ? 0 : 1) - speed) * 0.08;
+    const target = lensTarget(now);
+    const k = hovering ? 1 : 0.04;
+    lens.x += (target.x - lens.x) * k;
+    lens.y += (target.y - lens.y) * k;
+    const L = lens;
+
+    // The stream under the cursor (core or halo) lights its badge and signals in brand colour.
+    let active = -1;
+    if (hovering && pointer.y <= endY) {
+      const reach = ((bandCols - 1) / 2 + haloCols) * COL + 8;
+      streams.forEach((sx, i) => {
+        const x = cx + (sx - cx) * prof(pointer.y / endY);
+        if (Math.abs(pointer.x - x) <= reach) active = i;
+      });
+    }
+    badges.forEach((b, i) => b.classList.toggle("on", i === active));
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = "rgba(10,10,10,.07)";
+    ctx.lineWidth = 1;
+    [left - 6, left + Wb + 6].forEach((x0) => {
+      ctx.beginPath();
+      for (let i = 0; i <= 60; i++) {
+        const t = i / 60,
+          x = cx + (x0 - cx) * prof(t);
+        i ? ctx.lineTo(x, t * endY) : ctx.moveTo(x, 0);
+      }
+      ctx.stroke();
+    });
+
+    const found = [];
+    for (const p of parts) {
+      // Constant on-screen speed through the pinch, easing off as the stream drains into the hub.
+      const stretch =
+        Math.hypot((p.x0 - cx) * (1 - neckK) * shapeD(p.t), endY) / endY;
+      p.t +=
+        (((dt * speed * p.v) / TRAVEL_MS) *
+          (1 - 0.45 * smooth(pinchAt, 1, p.t))) /
+        stretch;
+      if (p.t >= 1) {
+        reset(p, 0);
+      }
+      if (p.s >= 0 && !p.passed && p.t * endY >= badgeYs[p.s]) {
+        p.passed = true;
+        if (p.sig) ping(badges[p.s]);
+      }
+      if (!reduced) {
+        p.next -= dt;
+        if (p.next <= 0) {
+          p.next = 260 + Math.random() * 1400;
+          if (p.kind !== "sq" && Math.random() < 0.6)
+            p.kind = p.kind === "0" ? "1" : "0";
+          p.a = 0.28 + Math.random() * 0.45;
+          if (Math.random() < 0.05) p.flash = 1;
+        }
+        p.flash *= Math.pow(0.9, dt / 16);
+      }
+
+      const t = p.t,
+        s = 1 - 0.5 * t * t;
+      const x = cx + (p.x0 - cx) * prof(t);
+      const y = t * endY;
+      const ex = (x - txt.x) / txt.w,
+        ey = (y - txt.y) / txt.h;
+      const calm =
+        0.1 + 0.9 * smooth(0.75, 1.2, ex * ex * ex * ex + ey * ey * ey * ey);
+      const fade =
+        Math.min(1, t / 0.03) *
+        (t > 0.96 ? (1 - t) / 0.04 : 1) *
+        Math.min(1, 0.12 + y / 240);
+      let a = Math.min(1, p.a + p.flash * 0.6) * calm * fade * p.w;
+
+      const d = Math.hypot(x - L.x, y - L.y);
+      const inLens = 1 - smooth(R * 0.82, R, d);
+      if (p.sig && inLens > 0) {
+        const sz = 7 * s;
+        ctx.globalAlpha = Math.max(a, inLens * fade);
+        ctx.fillStyle = p.s === active ? BRAND[p.s] : "#0a0a0a";
+        ctx.fillRect(x - sz / 2, y - sz / 2, sz, sz);
+        if (inLens > 0.5)
+          found.push({
+            x,
+            y,
+            d,
+            p,
+            alpha: inLens * fade * Math.max(calm, 0.5),
+          });
+        continue;
+      }
+      a *= 1 - 0.88 * inLens;
+      if (a < 0.01) continue;
+      ctx.globalAlpha = a;
+      // Network streams carry a faded brand tint (full colour while hovered); the rest stays neutral.
+      const col = p.s < 0 ? "#0a0a0a" : p.s === active ? BRAND[p.s] : tint(BRAND[p.s]);
+      if (p.kind === "sq") {
+        const sz = 5 * s;
+        ctx.fillStyle = col;
+        ctx.fillRect(x - sz / 2, y - sz / 2, sz, sz);
+      } else {
+        const sz = 12 * s;
+        ctx.drawImage(sprite(p.kind, col), x - sz / 2, y - sz / 2, sz, sz);
+      }
+    }
+
+    // Labels for the signals the lens has uncovered (the lens itself is invisible).
+    found.sort((a, b) => a.d - b.d);
+    const used = [];
+    const shown = new Set();
+    for (const f of found) {
+      if (used.length >= 4 || used.some((u) => Math.abs(u - f.y) < 22))
+        continue;
+      if (badgeX.some((bx, i) => Math.hypot(f.x - bx, f.y - badgeYs[i]) < 44)) continue;
+      const text = `${f.p.sig[0]} ${f.p.sig[1]}`;
+      if (shown.has(text)) continue;
+      ctx.font = '500 10px "Geist Mono", ui-monospace, monospace';
+      const w = ctx.measureText(text).width + 12;
+      // Point labels away from the copy; flip inward only if they would leave the bound.
+      let dir = f.x < cx ? -1 : 1;
+      if (dir < 0 && f.x - 14 - w < left) dir = 1;
+      if (dir > 0 && f.x + 14 + w > left + Wb) dir = -1;
+      // Skip a label that would cover a network badge or its caption.
+      const lx = dir > 0 ? f.x + 14 : f.x - 14 - w;
+      if (badgeX.some((bx, i) => lx < bx + 40 && lx + w > bx - 40 && f.y + 9 > badgeYs[i] - 26 && f.y - 9 < badgeYs[i] + 46)) continue;
+      used.push(f.y);
+      shown.add(text);
+      const color = f.p.s === active ? BRAND[f.p.s] : "#0a0a0a";
+      ctx.globalAlpha = f.alpha * 0.5;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(f.x + 5 * dir, f.y);
+      ctx.lineTo(f.x + 14 * dir, f.y);
+      ctx.stroke();
+      pill(lx, f.y, text, f.alpha, color);
+    }
+
+  }
+
+  const setPointer = (e) => {
+    const r = hero.getBoundingClientRect();
+    pointer = { x: e.clientX - r.left, y: e.clientY - r.top };
+    lastMove = performance.now();
+  };
+  hero.addEventListener("pointermove", setPointer);
+  hero.addEventListener("pointerdown", setPointer);
+  hero.addEventListener("pointerleave", () => {
+    pointer = null;
+    lastMove = -1e9;
+  });
+  new IntersectionObserver(([e]) => {
+    visible = e.isIntersecting;
+  }).observe(hero);
+  addEventListener("resize", layout);
+
+  // The last badge cycles through RSS sources so the hero shows the long tail, not just six networks.
+  const CYCLE = [["News","#D97706","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2\"/><path d=\"M18 14h-8M15 18h-5M10 6h8v4h-8z\"/></svg>"],["Hacker News","#FF6600","<svg viewBox=\"0 0 24 24\"><rect x=\"2\" y=\"2\" width=\"20\" height=\"20\" rx=\"3\" fill=\"currentColor\"/><path d=\"M7.5 6.5l4.5 6.5 4.5-6.5M12 13v5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["Medium","#000000","<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"6.6\" cy=\"12\" r=\"6.2\"/><ellipse cx=\"16.7\" cy=\"12\" rx=\"3.1\" ry=\"5.8\"/><ellipse cx=\"22\" cy=\"12\" rx=\"1.2\" ry=\"5.2\"/></svg>"],["Bluesky","#0085FF","<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 10.8C10.9 8.6 7.9 4.6 5.1 2.7 2.4.8 1.4 1.1.7 1.4 0 1.8 0 3 0 3.7c0 .7.4 5.6.6 6.4.8 2.7 3.6 3.6 6.2 3.3-3.8.6-7.2 2-2.8 6.9 4.9 5 6.7-1.1 7.6-4.2.9 3.1 2 9 7.5 4.2 4.2-4.2 1.2-6.3-2.7-6.9 2.6.3 5.4-.6 6.2-3.3.2-.8.6-5.7.6-6.4 0-.7-.1-1.9-.8-2.3-.7-.3-1.7-.6-4.4 1.3C16.1 4.6 13.1 8.6 12 10.8z\"/></svg>"],["Product Hunt","#DA552F","<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10.5\" fill=\"currentColor\"/><path d=\"M9.6 17v-10h3.4a3 3 0 0 1 0 6H9.6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["RSS feeds","#F26522","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11a9 9 0 0 1 9 9\"/><path d=\"M4 4a16 16 0 0 1 16 16\"/><circle cx=\"5\" cy=\"19\" r=\"1.2\" fill=\"currentColor\"/></svg>"]];
+  const cycler = hero.querySelector(".net.cycle");
+  let cycleAt = 0;
+  if (cycler && !reduced)
+    setInterval(() => {
+      cycler.classList.add("swap");
+      setTimeout(() => {
+        cycleAt = (cycleAt + 1) % CYCLE.length;
+        const [name, color, svg] = CYCLE[cycleAt];
+        cycler.querySelector(".cy").innerHTML = svg;
+        cycler.querySelector("span").textContent = name;
+        cycler.setAttribute("aria-label", name);
+        cycler.style.setProperty("--brand", color);
+        BRAND[BRAND.length - 1] = color;
+        cycler.classList.remove("swap");
+      }, 200);
+    }, 2600);
+
+  // The Flywheel hub pings on a steady beat, not per arriving bit.
+  const HUB_PING_MS = 3000;
+  if (!reduced) setInterval(() => visible && ping(hub), HUB_PING_MS);
+
+  makeSprites();
+  layout();
+  if (document.fonts)
+    document.fonts.ready.then(() => {
+      makeSprites();
+      layout();
+    });
+  requestAnimationFrame(frame);
+})();
+  // Horizontal wave: braided strands of bits flow left to right behind the four cards.
+  // Signal bits ping each card's icon as they pass, so the row reads as a pipeline.
+  (() => {
+    const cv = document.getElementById("wave");
+    if (!cv) return;
+    const ctx = cv.getContext("2d");
+    const wrap = cv.parentElement;
+    const icons = [...wrap.querySelectorAll(".card .ic")];
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const STRANDS = [
+      { amp: 20, k: 1.0, ph: 0.0, w: 1.0 },
+      { amp: 15, k: 1.35, ph: 2.1, w: 0.7 },
+      { amp: 11, k: 0.8, ph: 4.2, w: 0.5 },
+    ];
+    const TRAVEL_MS = 16000;
+    let W, H, midY, cardXs = [], parts = [], visible = false;
+    const sprites = {};
+    const sprite = (ch) => {
+      if (sprites[ch]) return sprites[ch];
+      const dpr = Math.min(2, devicePixelRatio || 1);
+      const c = document.createElement("canvas");
+      c.width = c.height = 24 * dpr;
+      const g = c.getContext("2d");
+      g.scale(dpr, dpr);
+      g.fillStyle = "#0a0a0a";
+      g.font = '500 20px "Geist Mono", ui-monospace, monospace';
+      g.textAlign = "center";
+      g.textBaseline = "middle";
+      g.fillText(ch, 12, 13);
+      return (sprites[ch] = c);
+    };
+    const smooth = (a, b, x) => { const k = Math.min(1, Math.max(0, (x - a) / (b - a))); return k * k * (3 - 2 * k); };
+
+    function reset(p, u) {
+      p.u = u;
+      p.v = 0.8 + Math.random() * 0.45;
+      const r = Math.random();
+      p.st = r < 0.5 ? 0 : r < 0.8 ? 1 : 2;
+      p.off = (Math.random() + Math.random() + Math.random() - 1.5) / 1.5; // roughly bell-shaped across the strand
+      p.kind = Math.random() < 0.3 ? "sq" : Math.random() < 0.5 ? "0" : "1";
+      p.a = 0.18 + Math.random() * 0.4;
+      p.sig = p.st === 0 && Math.random() < 0.03;
+      p.flash = 0;
+      p.next = Math.random() * 1200;
+    }
+
+    function layout() {
+      const dpr = Math.min(2, devicePixelRatio || 1);
+      W = cv.clientWidth; H = cv.clientHeight;
+      if (!W || !H) return;
+      cv.width = W * dpr; cv.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // The wave rides along the icon row, so it reads as a wire linking 01 to 04.
+      const r = cv.getBoundingClientRect();
+      const ib = icons[0].getBoundingClientRect();
+      midY = ib.top - r.top + ib.height / 2;
+      cardXs = icons.map((ic) => { const b = ic.getBoundingClientRect(); return b.left - r.left + b.width / 2; });
+      const n = Math.min(1400, Math.round(W / 1.4));
+      while (parts.length < n) { const p = {}; reset(p, Math.random()); parts.push(p); }
+      parts.length = n;
+    }
+
+    function ping(el) { el.classList.remove("hit"); void el.offsetWidth; el.classList.add("hit"); }
+
+    let prev = performance.now();
+    function frame(now) {
+      requestAnimationFrame(frame);
+      const dt = Math.min(50, now - prev); prev = now;
+      if (!visible || !W) return;
+      ctx.clearRect(0, 0, W, H);
+      for (const p of parts) {
+        const x0 = p.u * W;
+        if (!reduced) p.u += (dt * p.v) / TRAVEL_MS;
+        if (p.u >= 1) { reset(p, 0); continue; }
+        if (!reduced) {
+          p.next -= dt;
+          if (p.next <= 0) {
+            p.next = 260 + Math.random() * 1400;
+            if (p.kind !== "sq" && Math.random() < 0.6) p.kind = p.kind === "0" ? "1" : "0";
+            p.a = 0.18 + Math.random() * 0.4;
+            if (Math.random() < 0.05) p.flash = 1;
+          }
+          p.flash *= Math.pow(0.9, dt / 16);
+        }
+        const st = STRANDS[p.st];
+        const x = p.u * W;
+        const y = midY + st.amp * Math.sin((x / W) * Math.PI * 2 * st.k * 1.5 + st.ph + now * 0.0006) + p.off * 7;
+        const edge = smooth(0, 0.08, p.u) * (1 - smooth(0.92, 1, p.u));
+        if (p.sig) {
+          ctx.globalAlpha = 0.85 * edge;
+          ctx.fillStyle = "#0a0a0a";
+          ctx.fillRect(x - 3.5, y - 3.5, 7, 7);
+          cardXs.forEach((cx, i) => { if (x0 < cx && x >= cx) ping(icons[i]); });
+          continue;
+        }
+        const a = Math.min(1, p.a + p.flash * 0.6) * st.w * edge;
+        if (a < 0.01) continue;
+        ctx.globalAlpha = a;
+        if (p.kind === "sq") { ctx.fillStyle = "#0a0a0a"; ctx.fillRect(x - 2.5, y - 2.5, 5, 5); }
+        else ctx.drawImage(sprite(p.kind), x - 6, y - 6, 12, 12);
+      }
+    }
+
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) layout(); }).observe(wrap);
+    addEventListener("resize", layout);
+    if (document.fonts) document.fonts.ready.then(() => { for (const k in sprites) delete sprites[k]; layout(); });
+    layout();
+    requestAnimationFrame(frame);
+  })();
+
+  // Billing toggle
+  document.querySelectorAll('[data-bill]').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-bill]').forEach((x) => x.classList.toggle('on', x === b));
+    document.querySelectorAll('.price[data-m]').forEach((p) => {
+      p.innerHTML = '$' + p.dataset[b.dataset.bill] + '<small> /mo</small>';
+    });
+  }));
+</script>
+</body>
+</html>
