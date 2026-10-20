@@ -1074,18 +1074,6 @@
     badges.forEach((b, i) => b.classList.toggle("on", i === active));
 
     ctx.clearRect(0, 0, W, H);
-    ctx.globalAlpha = 1;
-    ctx.strokeStyle = "rgba(10,10,10,.07)";
-    ctx.lineWidth = 1;
-    [left - 6, left + Wb + 6].forEach((x0) => {
-      ctx.beginPath();
-      for (let i = 0; i <= 60; i++) {
-        const t = i / 60,
-          x = cx + (x0 - cx) * prof(t);
-        i ? ctx.lineTo(x, t * endY) : ctx.moveTo(x, 0);
-      }
-      ctx.stroke();
-    });
 
     const found = [];
     for (const p of parts) {
