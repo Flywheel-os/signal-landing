@@ -58,7 +58,7 @@
   .btn-sm { height: 34px; padding: 0 14px; font-size: 13px; }
   /* Primary: black pill with a light sweeping round its border (inverted "star button") */
   .btn-star { position: relative; isolation: isolate; overflow: hidden; color: #fff; background: var(--lapis); }
-  .btn-star::before { content: ""; position: absolute; inset: -150%; z-index: -2; background: conic-gradient(from 0deg, transparent 0 300deg, #c7cef5 340deg, transparent 360deg); animation: spin 3s linear infinite; }
+  .btn-star::before { content: ""; position: absolute; inset: -150%; z-index: -2; background: conic-gradient(from 0deg, transparent 0 300deg, #c7cef5 340deg, transparent 360deg); animation: spin 3s linear infinite; will-change: transform; }
   .btn-star::after { content: ""; position: absolute; inset: 1.5px; z-index: -1; border-radius: inherit; background: var(--lapis); }
   .btn-star:hover::after { background: var(--lapis-deep); }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -66,7 +66,7 @@
   /* Nav */
   nav.top { position: fixed; top: 12px; left: 30px; right: 30px; z-index: 50; }
   nav.top .bar { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 8px 8px 8px 18px; border-radius: 18px; transition: background .25s, box-shadow .25s, backdrop-filter .25s; }
-  nav.top.scrolled .bar { background: rgba(250,249,246,.82); backdrop-filter: blur(14px); box-shadow: 0 0 0 1px var(--border), 0 8px 24px -12px rgba(0,0,0,.12); }
+  nav.top.scrolled .bar { background: rgba(250,249,246,.96); box-shadow: 0 0 0 1px var(--border), 0 8px 24px -12px rgba(0,0,0,.12); }
   .logo { display: flex; align-items: center; gap: 9px; font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -0.045em; }
   .logo-mark { width: 26px; height: 26px; border-radius: 8px; background: var(--lapis); display: grid; place-items: center; }
   .logo-mark rect { transition: translate .35s ease; }
@@ -113,6 +113,9 @@
   .net[aria-label="X"].on span { color: var(--fg); }
   .net[aria-label="YouTube"] { --brand: #FF0000; }
   .net[aria-label="Instagram"] { --brand: #E1306C; }
+  .net[aria-label="TikTok"] { --brand: #FE2C55; }
+  .net[aria-label="TikTok"].on { background: #000; color: #fff; box-shadow: -2px -1px 0 0 #25F4EE, 2px 1px 0 0 #FE2C55; }
+  .net[aria-label="TikTok"].on span { color: var(--fg); }
   .net[aria-label="Instagram"].on { color: #fff; background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
   .hub { position: absolute; left: 50%; bottom: 64px; width: 88px; height: 88px; margin-left: -44px; border-radius: 50%; background: var(--lapis); box-shadow: 0 0 0 6px rgba(10,40,200,.08), 0 18px 40px -14px rgba(10,40,200,.55); display: grid; place-items: center; z-index: 2; transition: transform .2s; }
   .hub.hit { transform: scale(1.06); }
@@ -258,6 +261,7 @@
   .src .ic { width: 30px; height: 30px; border-radius: 9px; background: var(--brand, var(--fg)); color: #fff; display: grid; place-items: center; }
   .src .ic svg { width: 16px; height: 16px; }
   .src-note { margin-top: 22px; color: var(--muted); font-size: 14px; }
+  .src .ic.tt { background: #000; box-shadow: -1.5px -1px 0 0 #25F4EE inset, 1.5px 1px 0 0 #FE2C55 inset; }
   .src .ic.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
 
   /* Testimonials */
@@ -612,7 +616,7 @@
 <section class="hero" id="product">
   <canvas id="bits" aria-hidden="true"></canvas>
   <div class="wrap" style="text-align:center">
-    <span class="pulse-pill"><span class="dot"><i></i></span>Listening across LinkedIn, X, YouTube, Instagram, Substack, podcasts and any RSS feed</span>
+    <span class="pulse-pill"><span class="dot"><i></i></span>Listening across LinkedIn, X, YouTube, Instagram, TikTok, Substack, podcasts and any RSS feed</span>
     <h1 class="display">Hear every conversation about your market. <span class="hl">Join the right ones.</span></h1>
     <p class="lede">Felix watches your keywords, competitors and mentions, drafts replies in your voice and ships your posts on schedule.</p>
     <div class="ctas">
@@ -625,8 +629,10 @@
   <div class="net" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></div>
   <div class="net" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.22-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg><span>X</span></div>
   <div class="net" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg><span>YouTube</span></div>
+  <div class="net" aria-label="Podcasts" style="--brand:#9933CC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="1.4" fill="currentColor"/><path d="M11 17a1 1 0 0 1 2 0c0 .5-.34 3-.5 4.5a.5.5 0 0 1-1 0c-.16-1.5-.5-4-.5-4.5Z"/><path d="M8 14a5 5 0 1 1 8 0"/><path d="M17 18.5a9 9 0 1 0-10 0"/></svg><span>Podcasts</span></div>
   <div class="net" aria-label="Substack" style="--brand:#FF6719"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.6H3V5.2h18v2.4zM3 9.8V21l9-5 9 5V9.8H3zM21 1H3v2.4h18V1z"/></svg><span>Substack</span></div>
   <div class="net" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><path d="M17.5 6.5h.01"/></svg><span>Instagram</span></div>
+  <div class="net" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg><span>TikTok</span></div>
   <div class="net cycle" aria-label="News"><i class="cy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></i><span>News</span></div>
   <div class="hub" id="hub" aria-label="Felix">
     <div class="hub-ring"></div>
@@ -811,6 +817,7 @@
       <span class="src"><span class="ic" style="--brand:#000"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.22-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg></span>X</span>
       <span class="src"><span class="ic" style="--brand:#FF0000"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></span>YouTube</span>
       <span class="src"><span class="ic ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><path d="M17.5 6.5h.01"/></svg></span>Instagram</span>
+      <span class="src"><span class="ic tt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>TikTok</span>
       <span class="src"><span class="ic" style="--brand:#FF6719"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 8.24H1.46V5.41h21.08v2.83zM1.46 10.81V24L12 18.11 22.54 24V10.81H1.46zM22.54 0H1.46v2.84h21.08V0z"/></svg></span>Substack</span>
       <span class="src"><span class="ic" style="--brand:#000"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6.6" cy="12" r="6.2"/><ellipse cx="16.7" cy="12" rx="3.1" ry="5.8"/><ellipse cx="22" cy="12" rx="1.2" ry="5.2"/></svg></span>Medium</span>
       <span class="src"><span class="ic" style="--brand:#FF6600"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 5l5.5 8 5.5-8M12 13v6.5"/></svg></span>Hacker News</span>
@@ -861,7 +868,7 @@
         <div class="price" data-m="149" data-a="119">$149<small> /mo</small></div>
         <ul>
           <li><svg width="13" height="13"><use href="#i-check"/></svg>Everything in Starter</li>
-          <li><svg width="13" height="13"><use href="#i-check"/></svg>YouTube, Instagram and news</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>YouTube, Instagram, TikTok and news</li>
           <li><svg width="13" height="13"><use href="#i-check"/></svg>Competitor monitoring</li>
           <li><svg width="13" height="13"><use href="#i-check"/></svg>Post and comment analytics</li>
           <li><svg width="13" height="13"><use href="#i-check"/></svg>Slack alerts and approvals</li>
@@ -899,7 +906,7 @@
   <div class="wrap faq">
     <header class="reveal"><h2 class="h2"><b>Questions, answered.</b></h2><p class="muted" style="margin-top:14px;max-width:340px">Can't find what you need? <a href="mailto:hello@flywheelos.com" style="color:var(--fg);text-decoration:underline">Email the team</a>.</p></header>
     <div class="reveal">
-      <details open><summary>Which networks does Felix listen to?<span class="pm"></span></summary><p>LinkedIn, X, YouTube and Instagram, plus anything with an RSS feed: Substack, Medium, Hacker News, Product Hunt, podcasts, news sites and blogs. You can track keywords, specific accounts, competitors and mentions of your brand.</p></details>
+      <details open><summary>Which networks does Felix listen to?<span class="pm"></span></summary><p>LinkedIn, X, YouTube, Instagram and TikTok, plus anything with an RSS feed: Substack, Medium, Hacker News, Product Hunt, podcasts, news sites and blogs. You can track keywords, specific accounts, competitors and mentions of your brand.</p></details>
       <details><summary>Can Felix reply on Substack, podcasts or news sites?<span class="pm"></span></summary><p>No. Feeds are listen-only. Felix reads them for competitor moves, brand mentions and trends, then turns what it finds into alerts and post ideas you can publish on your own social accounts.</p></details>
       <details><summary>Does Felix post or comment without asking me?<span class="pm"></span></summary><p>No. Every reply and post waits for approval by default. You can approve in the app, in Slack or by email, and agencies can send approval links to clients.</p></details>
       <details><summary>How does it learn my voice?<span class="pm"></span></summary><p>Felix reads your past posts and builds a voice profile: tone, sentence length, words you use and words you avoid. Drafts are written against that profile and get better as you edit them.</p></details>
@@ -988,7 +995,7 @@
   const ctx = cv.getContext("2d");
   const textBox = hero.querySelector(".wrap");
   const hub = document.getElementById("hub");
-  const badges = [...hero.querySelectorAll(".net")]; // LinkedIn, X, YouTube (left), Substack, Instagram, cycling RSS (right)
+  const badges = [...hero.querySelectorAll(".net")]; // LinkedIn, X, YouTube, Podcasts (left), Substack, Instagram, TikTok, cycling RSS (right)
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (matchMedia("(hover: none)").matches)
     document.getElementById("hintText").textContent =
@@ -1005,7 +1012,7 @@
     ["Reach play", 84],
   ];
   // Feed streams (Podcasts, Substack, the cycling RSS slot) are listen-only: no reply-style signals there.
-  const FEED_STREAMS = new Set([3, 5]);
+  const FEED_STREAMS = new Set([3, 4, 7]);
   const FEED_TYPES = [
     ["Competitor launch", 88],
     ["Brand mention", 94],
@@ -1020,8 +1027,8 @@
   const AMBIENT_SHARE = 0.08; // faint bits between the streams
   const HALO_SHARE = 0.4; // of stream bits, the share in the faint band around the strong core
   const CENTER_SHARE = 0.16; // faint stream down the middle, around the copy
-  // Brand colour per stream, in badge order: LinkedIn, X, YouTube, Substack, Instagram, cycling RSS.
-  const BRAND = ["#0A66C2", "#000000", "#FF0000", "#FF6719", "#E1306C", "#D97706"];
+  // Brand colour per stream, in badge order: LinkedIn, X, YouTube, Podcasts, Substack, Instagram, TikTok, cycling RSS.
+  const BRAND = ["#0A66C2", "#000000", "#FF0000", "#9933CC", "#FF6719", "#E1306C", "#FE2C55", "#D97706"];
   const INK = "#0d0d0d", LAPIS = "#0a28c8";
   const HUB_BOTTOM = 64 + 44; // .hub bottom offset + half its height
 
@@ -1051,11 +1058,12 @@
     speed = 1,
     visible = true;
   let lens = { x: 0, y: 0 };
+  let lastActive = -2;
   // Glyph sprites are cached per colour, so each stream can carry its network's tint.
   function sprite(ch, color = INK) {
     const key = ch + color;
     if (sprites[key]) return sprites[key];
-    const dpr = Math.min(2, devicePixelRatio || 1);
+    const dpr = Math.min(1.25, devicePixelRatio || 1);
     const c = document.createElement("canvas");
     c.width = c.height = 24 * dpr;
     const g = c.getContext("2d");
@@ -1139,13 +1147,13 @@
       }
     }
     p.kind = Math.random() < 0.3 ? "sq" : Math.random() < 0.5 ? "0" : "1";
-    p.a = 0.28 + Math.random() * 0.45;
+    p.a = 0.34 + Math.random() * 0.45;
     p.flash = 0;
     p.next = Math.random() * 1200;
   }
 
   function layout() {
-    const dpr = Math.min(2, devicePixelRatio || 1);
+    const dpr = Math.min(1.25, devicePixelRatio || 1);
     W = hero.clientWidth;
     H = hero.clientHeight;
     cv.width = W * dpr;
@@ -1178,13 +1186,13 @@
     const gStart = h1.width / 2 + 40 + band / 2,
       gEnd = Wb / 2 - band / 2 - 10;
     // Three streams a side, so the gutter needs room for two gaps of a band plus spacing.
-    inGutter = gEnd - gStart >= 2 * (band + 20);
+    inGutter = gEnd - gStart >= 3 * (band + 20);
     const offs = inGutter
-      ? [0, 1 / 2, 1].map((k) => gStart + (gEnd - gStart) * k)
-      : [0.1, 0.26, 0.42].map((k) => Wb * k);
+      ? [0, 1 / 3, 2 / 3, 1].map((k) => gStart + (gEnd - gStart) * k)
+      : [0.08, 0.2, 0.32, 0.44].map((k) => Wb * k);
     const inner = offs[0];
-    // Badge order: LinkedIn, X, YouTube (left, outer to inner), then Substack, Instagram, RSS (right, inner to outer).
-    streams = [cx - offs[2], cx - offs[1], cx - offs[0], cx + offs[0], cx + offs[1], cx + offs[2]];
+    // Badge order: LinkedIn, X, YouTube, Podcasts (left, outer to inner), then Substack, Instagram, TikTok, RSS (right, inner to outer).
+    streams = [cx - offs[3], cx - offs[2], cx - offs[1], cx - offs[0], cx + offs[0], cx + offs[1], cx + offs[2], cx + offs[3]];
     // The central stream fills the space between the inner streams' halos.
     centerHalf = Math.max(COL * 3, inner - band / 2 - haloCols * COL);
 
@@ -1209,7 +1217,7 @@
     const perStream = (bandCols * endY) / 9;
     // Capped so big screens stay smooth; density per stream is already set by bandCols.
     const n = Math.min(
-      4200,
+      2800,
       Math.round(
         (perStream * streams.length) /
           (1 - HALO_SHARE) /
@@ -1255,10 +1263,12 @@
   let prev = performance.now();
   function frame(now) {
     requestAnimationFrame(frame);
-    const dt = Math.min(50, now - prev);
-    prev = now;
-    if (!visible) return;
+    if (!visible) { prev = now; return; }
     const hovering = pointer && now - lastMove < 2600;
+    // Idle drift is slow, so 30fps is enough; full rate while the cursor drives the lens.
+    if (!hovering && now - prev < 30) return;
+    const dt = Math.min(66, now - prev);
+    prev = now;
     speed += ((reduced ? 0 : 1) - speed) * 0.08;
     const target = lensTarget(now);
     const k = hovering ? 1 : 0.04;
@@ -1275,9 +1285,13 @@
         if (Math.abs(pointer.x - x) <= reach) active = i;
       });
     }
-    badges.forEach((b, i) => b.classList.toggle("on", i === active));
+    if (active !== lastActive) {
+      badges.forEach((b, i) => b.classList.toggle("on", i === active));
+      lastActive = active;
+    }
 
     ctx.clearRect(0, 0, W, H);
+    const flashDecay = Math.pow(0.9, dt / 16);
 
     const found = [];
     for (const p of parts) {
@@ -1301,10 +1315,10 @@
           p.next = 260 + Math.random() * 1400;
           if (p.kind !== "sq" && Math.random() < 0.6)
             p.kind = p.kind === "0" ? "1" : "0";
-          p.a = 0.28 + Math.random() * 0.45;
+          p.a = 0.34 + Math.random() * 0.45;
           if (Math.random() < 0.05) p.flash = 1;
         }
-        p.flash *= Math.pow(0.9, dt / 16);
+        p.flash *= flashDecay;
       }
 
       const t = p.t,
@@ -1404,7 +1418,7 @@
   addEventListener("resize", layout);
 
   // The last badge cycles through RSS sources so the hero shows the long tail, not just six networks.
-  const CYCLE = [["News","#D97706","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2\"/><path d=\"M18 14h-8M15 18h-5M10 6h8v4h-8z\"/></svg>"],["Podcasts","#9933CC","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"11\" r=\"1.4\" fill=\"currentColor\"/><path d=\"M11 17a1 1 0 0 1 2 0c0 .5-.34 3-.5 4.5a.5.5 0 0 1-1 0c-.16-1.5-.5-4-.5-4.5Z\"/><path d=\"M8 14a5 5 0 1 1 8 0\"/><path d=\"M17 18.5a9 9 0 1 0-10 0\"/></svg>"],["Hacker News","#FF6600","<svg viewBox=\"0 0 24 24\"><rect x=\"2\" y=\"2\" width=\"20\" height=\"20\" rx=\"3\" fill=\"currentColor\"/><path d=\"M7.5 6.5l4.5 6.5 4.5-6.5M12 13v5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["Medium","#000000","<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"6.6\" cy=\"12\" r=\"6.2\"/><ellipse cx=\"16.7\" cy=\"12\" rx=\"3.1\" ry=\"5.8\"/><ellipse cx=\"22\" cy=\"12\" rx=\"1.2\" ry=\"5.2\"/></svg>"],["Product Hunt","#DA552F","<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10.5\" fill=\"currentColor\"/><path d=\"M9.6 17v-10h3.4a3 3 0 0 1 0 6H9.6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["RSS feeds","#F26522","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11a9 9 0 0 1 9 9\"/><path d=\"M4 4a16 16 0 0 1 16 16\"/><circle cx=\"5\" cy=\"19\" r=\"1.2\" fill=\"currentColor\"/></svg>"]];
+  const CYCLE = [["News","#D97706","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2\"/><path d=\"M18 14h-8M15 18h-5M10 6h8v4h-8z\"/></svg>"],["Hacker News","#FF6600","<svg viewBox=\"0 0 24 24\"><rect x=\"2\" y=\"2\" width=\"20\" height=\"20\" rx=\"3\" fill=\"currentColor\"/><path d=\"M7.5 6.5l4.5 6.5 4.5-6.5M12 13v5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["Medium","#000000","<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"6.6\" cy=\"12\" r=\"6.2\"/><ellipse cx=\"16.7\" cy=\"12\" rx=\"3.1\" ry=\"5.8\"/><ellipse cx=\"22\" cy=\"12\" rx=\"1.2\" ry=\"5.2\"/></svg>"],["Product Hunt","#DA552F","<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10.5\" fill=\"currentColor\"/><path d=\"M9.6 17v-10h3.4a3 3 0 0 1 0 6H9.6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["RSS feeds","#F26522","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11a9 9 0 0 1 9 9\"/><path d=\"M4 4a16 16 0 0 1 16 16\"/><circle cx=\"5\" cy=\"19\" r=\"1.2\" fill=\"currentColor\"/></svg>"]];
   const cycler = hero.querySelector(".net.cycle");
   let cycleAt = 0;
   if (cycler && !reduced)
@@ -1457,7 +1471,7 @@
     const sprites = {};
     const sprite = (ch) => {
       if (sprites[ch]) return sprites[ch];
-      const dpr = Math.min(2, devicePixelRatio || 1);
+      const dpr = Math.min(1.25, devicePixelRatio || 1);
       const c = document.createElement("canvas");
       c.width = c.height = 24 * dpr;
       const g = c.getContext("2d");
@@ -1484,7 +1498,7 @@
     }
 
     function layout() {
-      const dpr = Math.min(2, devicePixelRatio || 1);
+      const dpr = Math.min(1.25, devicePixelRatio || 1);
       W = cv.clientWidth; H = cv.clientHeight;
       if (!W || !H) return;
       cv.width = W * dpr; cv.height = H * dpr;
@@ -1494,7 +1508,7 @@
       const ib = icons[0].getBoundingClientRect();
       midY = ib.top - r.top + ib.height / 2;
       cardXs = icons.map((ic) => { const b = ic.getBoundingClientRect(); return b.left - r.left + b.width / 2; });
-      const n = Math.min(1400, Math.round(W / 1.4));
+      const n = Math.min(800, Math.round(W / 2.2));
       while (parts.length < n) { const p = {}; reset(p, Math.random()); parts.push(p); }
       parts.length = n;
     }
@@ -1577,7 +1591,7 @@
   const pick = () =>
     Math.random() < 0.25 ? "sq" : Math.random() < 0.5 ? "0" : "1";
   function layout() {
-    const dpr = Math.min(2, devicePixelRatio || 1);
+    const dpr = Math.min(1.25, devicePixelRatio || 1);
     W = box.clientWidth;
     H = box.clientHeight;
     if (!W || !H) return;
@@ -1593,11 +1607,24 @@
     }));
     draw(0);
   }
+  const glyph = {};
+  function sprites() {
+    for (const ch of ["0", "1"]) {
+      const c = document.createElement("canvas");
+      c.width = c.height = 32;
+      const g = c.getContext("2d");
+      g.scale(2, 2);
+      g.fillStyle = "#fff";
+      g.font = '500 13px "DM Mono", ui-monospace, monospace';
+      g.textAlign = "center";
+      g.textBaseline = "middle";
+      g.fillText(ch, 8, 8.5);
+      glyph[ch] = c;
+    }
+  }
+  sprites();
   function draw(dt) {
     ctx.clearRect(0, 0, W, H);
-    ctx.font = '500 13px "DM Mono", ui-monospace, monospace';
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
     ctx.fillStyle = "#fff";
     for (const c of cols) {
       c.y += dt * c.v;
@@ -1616,7 +1643,7 @@
         if (g === "sq") {
           const s = k === 0 ? 6 : 4;
           ctx.fillRect(c.x - s / 2, y - s / 2, s, s);
-        } else ctx.fillText(g, c.x, y);
+        } else ctx.drawImage(glyph[g], c.x - 8, y - 8, 16, 16);
       }
     }
     ctx.globalAlpha = 1;
@@ -1624,7 +1651,8 @@
   let prev = performance.now();
   function frame(now) {
     requestAnimationFrame(frame);
-    const dt = Math.min(50, now - prev) / 16;
+    if (now - prev < 32) return; // ~30fps is plenty for falling glyphs
+    const dt = Math.min(80, now - prev) / 16;
     prev = now;
     if (visible && !reduced && W) draw(dt);
   }
@@ -1632,7 +1660,11 @@
     visible = e.isIntersecting;
   }).observe(box);
   addEventListener("resize", layout);
-  if (document.fonts) document.fonts.ready.then(layout);
+  if (document.fonts)
+    document.fonts.ready.then(() => {
+      sprites();
+      layout();
+    });
   layout();
   requestAnimationFrame(frame);
 })();
