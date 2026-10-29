@@ -330,6 +330,166 @@
   .f-base { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); gap: 20px; flex-wrap: wrap; }
   .f-base nav { display: flex; gap: 20px; }
 
+
+  /* Real Flywheel app UI (TwittApp client, origin/main 28 Oct 2026): index.css tokens, ui/ primitives,
+     AppSidebar, ContentRadar, LinkedInCommentsTab, CalendarGrid/CalendarCard, Approvals. Scoped to .fw. */
+  .fw { --b-bg: hsl(40 20% 96%); --b-paper: hsl(45 40% 98%); --b-card: #fff; --b-fg: #000; --b-muted: hsl(40 18% 90%);
+    --b-mfg: hsl(35 7% 45%); --b-sec: hsl(40 20% 87%); --b-border: hsl(40 16% 85%); --b-r: 4px;
+    font-family: "Inter", system-ui, sans-serif; color: var(--b-fg); font-size: 14px; line-height: 1.43; text-align: left; letter-spacing: 0; }
+  .fw .i { width: 16px; height: 16px; flex: none; }
+  .fw .i12 { width: 12px; height: 12px; flex: none; }
+  .fw .i14 { width: 14px; height: 14px; flex: none; }
+  .fw .numeric { font-family: "DM Mono", ui-monospace, monospace; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.025em; }
+  .fw .mfg { color: var(--b-mfg); }
+  /* Button (ui/button.tsx): default = btn-accent sand gradient */
+  .fw .bt { display: inline-flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; border-radius: var(--b-r); font-size: 14px; font-weight: 500; height: 36px; padding: 0 12px; }
+  .fw .bt.acc { background-image: linear-gradient(135deg, rgba(215,200,175,.45) 0%, rgba(196,184,154,.35) 50%, rgba(215,200,175,.45) 100%); color: hsl(30 14% 24%); border: 1px solid rgba(196,184,154,.55); box-shadow: inset 0 1px 0 rgba(255,252,248,.5); }
+  .fw .bt.out { border: 1px solid var(--b-border); background: transparent; }
+  .fw .bt.ghost { color: var(--b-fg); }
+  .fw .bt.ghost:hover, .fw .bt.out:hover { background: var(--b-muted); }
+  .fw .bt.xs { height: 28px; padding: 0 8px; gap: 4px; font-size: 12px; }
+  .fw .bt.xs .i { width: 14px; height: 14px; }
+
+  /* App shell: AppSidebar + top bar */
+  .fw-shell { display: grid; grid-template-columns: 236px 1fr; height: 560px; background: var(--b-bg); }
+  .fw-side { display: flex; flex-direction: column; background: var(--b-bg); border-right: 1px solid var(--b-border); min-height: 0; }
+  .fw-team { height: 48px; display: flex; align-items: center; gap: 8px; padding: 0 12px; border-bottom: 1px solid var(--b-border); }
+  .fw-team svg.bm { width: 26px; height: 26px; }
+  .fw-team b { font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
+  .fw-team .i { margin-left: auto; opacity: .5; }
+  .fw-nav { padding: 8px; display: flex; flex-direction: column; gap: 1px; flex: 1; }
+  .fw-nav a { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 8px; border-radius: var(--b-r); font-size: 14px; }
+  .fw-nav a:hover { background: var(--b-sec); }
+  .fw-nav a .chev { margin-left: auto; opacity: .7; }
+  .fw-nav a .chev.open { transform: rotate(90deg); }
+  .fw-sub { margin: 0 0 2px 15px; padding: 2px 0 2px 10px; border-left: 1px solid var(--b-border); display: flex; flex-direction: column; gap: 1px; }
+  .fw-sub a { height: 28px; font-size: 14px; }
+  .fw-nav a.on { background: var(--b-sec); font-weight: 500; }
+  .fw-nav hr { border: 0; height: 1px; background: var(--b-border); margin: 6px 8px; }
+  .fw-nav .cnt { margin-left: auto; display: flex; height: 20px; min-width: 20px; align-items: center; justify-content: center; border-radius: 999px; background: #ef4444; padding: 0 6px; font-size: 10px; font-weight: 500; color: #fff; }
+  .fw-user { border-top: 1px solid var(--b-border); padding: 10px 12px; display: flex; gap: 10px; align-items: center; font-size: 13px; line-height: 1.25; }
+  .fw-user .av { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #000, hsl(40 18% 70%)); color: hsl(40 20% 96%); font-size: 12px; font-weight: 600; box-shadow: 0 0 0 2px rgba(0,0,0,.3); }
+  .fw-user small { display: block; color: var(--b-mfg); font-size: 12px; }
+  .fw-main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+  .fw-top { height: 48px; flex: none; display: flex; align-items: center; gap: 10px; padding: 0 14px; border-bottom: 1px solid var(--b-border); font-size: 14px; }
+  .fw-top .sep { color: var(--b-mfg); }
+  .fw-top .mfg { color: var(--b-mfg); }
+  .fw-bar { height: 48px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 16px; background: #fff; box-shadow: inset 0 -1px 0 0 rgb(229,231,235); }
+  .fw-dd { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 14px; border-radius: var(--b-r); }
+  .fw-dd:hover { background: var(--b-muted); }
+  .fw-dd .i.cd { color: var(--b-mfg); }
+  .fw-bar .search { display: inline-flex; align-items: center; gap: 8px; color: var(--b-mfg); padding: 6px 4px; }
+
+  /* Content Radar (ContentRadar.tsx + CompactSourceEventCard.tsx) */
+  .fw-radar { flex: 1; min-height: 0; overflow: hidden; background: var(--b-paper); padding: 24px; display: flex; gap: 16px; align-items: flex-start; position: relative; }
+  .fw-radar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: linear-gradient(transparent, var(--b-paper)); pointer-events: none; }
+  .fw-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+  .rc { position: relative; background: var(--b-card); border: 1px solid var(--b-border); border-radius: var(--b-r); padding: 12px; cursor: pointer; }
+  .rc.comp { border-color: #fde68a; }
+  .rc h3 { font-family: inherit; font-weight: 500; font-size: 14px; line-height: 1.25; letter-spacing: 0; display: flex; gap: 8px; margin-bottom: 8px; }
+  .rc h3 span { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .rc h3 .more { color: var(--b-mfg); padding: 1px; border-radius: var(--b-r); opacity: 0; }
+  .rc:hover h3 .more, .rc.open h3 .more { opacity: 1; }
+  .rc.open h3 .more { background: var(--b-muted); }
+  .rc p { font-size: 14px; color: var(--b-mfg); margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .rc .cat { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: var(--b-r); background: hsl(40 18% 90% / .5); color: var(--b-mfg); font-weight: 500; margin: -4px 4px 12px 0; }
+  .rc .ft { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--b-border); }
+  .rc .src { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--b-mfg); min-width: 0; }
+  .rc .src span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 120px; }
+  .fw .sa { width: 20px; height: 20px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 8px; font-weight: 600; color: #fff; background: hsl(40 18% 90% / .5); }
+  .rc .mt { display: flex; align-items: center; gap: 8px; flex: none; font-size: 10px; color: var(--b-mfg); }
+  .rc .mt span { display: inline-flex; align-items: center; gap: 4px; }
+  .fw-menu { position: absolute; z-index: 3; top: 34px; right: 6px; width: 196px; background: hsl(42 33% 98%); border: 1px solid var(--b-border); border-radius: var(--b-r); box-shadow: 0 10px 24px -10px rgba(0,0,0,.25); padding: 4px; font-size: 14px; }
+  .fw-menu div { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: var(--b-r); }
+  .fw-menu div.hov { background: var(--b-muted); }
+  .fw-menu .lbl { font-size: 11px; font-weight: 600; letter-spacing: .44px; color: var(--b-mfg); padding: 8px 8px 4px; }
+  .fw-menu hr { border: 0; height: 1px; background: var(--b-border); margin: 4px -4px; }
+
+  /* Showcase mocks share the app surface */
+  .stage .mock.fw { background: var(--b-paper); border-radius: 10px; box-shadow: 0 0 0 1px var(--b-border), 0 24px 50px -30px rgba(0,0,0,.25); }
+  .fw-sources { padding: 16px; display: grid; gap: 10px; min-height: 360px; position: relative; }
+  .fw-sources .fw-bar { margin: -16px -16px 0; border-radius: 10px 10px 0 0; }
+  .fw-sources .fw-menu { position: relative; top: auto; right: auto; width: 264px; margin-left: 2px; }
+
+  /* Comments thread (LinkedInCommentsTab.tsx) */
+  .fw-thread { padding: 18px 20px; display: grid; gap: 4px; }
+  .fw-thread .back { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--b-mfg); margin-bottom: 6px; }
+  .fw-thread .meta { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--b-mfg); margin-bottom: 8px; }
+  .cm { display: flex; gap: 10px; padding-bottom: 12px; }
+  .cm .rail { display: flex; flex-direction: column; align-items: center; }
+  .cm .rail i { width: 1px; flex: 1; background: var(--b-border); margin-top: 4px; }
+  .cm .body { flex: 1; min-width: 0; }
+  .cm .who { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; }
+  .cm .who .t { margin-left: auto; font-weight: 400; color: var(--b-mfg); }
+  .cm .txt { font-size: 12px; margin-top: 2px; }
+  .cm .st { display: flex; gap: 10px; font-size: 11px; color: var(--b-mfg); margin-top: 4px; align-items: center; }
+  .cm .st span { display: inline-flex; gap: 4px; align-items: center; }
+  .cm .acts { display: flex; gap: 2px; margin: 2px 0 0 -8px; }
+  .pill { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; border: 1px solid; padding: 2px 10px; font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .cm .pill { font-size: 11px; padding: 0 8px; }
+  .pill.lead { border-color: #a7f3d0; color: #047857; }
+  .pill.sent { border-color: #bbf7d0; color: #15803d; }
+  .composer { padding-left: 30px; margin: 2px 0 14px; }
+  .composer .to { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--b-mfg); margin-bottom: 6px; }
+  .composer .to b { font-weight: 500; color: var(--b-fg); }
+  .composer .box { border: 1px solid hsl(43 26% 69%); box-shadow: 0 0 0 2px hsl(43 26% 69% / .35); border-radius: var(--b-r); background: #fff; padding: 6px 10px; font-size: 12px; line-height: 1.6; min-height: 74px; }
+  .composer .row { display: flex; align-items: center; margin-top: 6px; gap: 8px; }
+  .composer .row .n { margin-left: auto; font-size: 11px; color: var(--b-mfg); }
+
+  /* Calendar week (CalendarGrid / CalendarDayCell / CalendarCard + lib/postStatus) */
+  .fw-cal .fw-bar { gap: 6px; padding: 0 10px; border-radius: 10px 10px 0 0; }
+  .fw-cal .month { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; }
+  .fw-cal .views { margin-left: auto; display: flex; font-size: 13px; font-weight: 500; }
+  .fw-cal .views span { padding: 4px 9px; color: var(--b-mfg); border-left: 1px solid var(--b-border); }
+  .fw-cal .views span:first-child { border-left: 0; color: var(--b-fg); }
+  .fw-cal .bt.acc { height: 30px; padding: 0 10px; font-size: 13px; }
+  .wk { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-left: 1px solid var(--b-border); }
+  .wk .hd { height: 34px; padding: 9px 0 0 8px; font-size: 11px; font-weight: 600; color: var(--b-mfg); text-transform: uppercase; letter-spacing: .05em; background: #fff; border-bottom: 1px solid var(--b-border); border-right: 1px solid var(--b-border); }
+  .wk .day { position: relative; min-height: 300px; background: #fff; border-right: 1px solid var(--b-border); padding: 26px 4px 4px; display: flex; flex-direction: column; gap: 4px; }
+  .wk .day.past { background: hsl(40 18% 90% / .3); }
+  .wk .day .d { position: absolute; top: 4px; left: 8px; font-size: 12px; color: var(--b-mfg); }
+  .wk .day .d.today { background: var(--b-sec); color: var(--b-fg); border-radius: var(--b-r); padding: 0 4px; left: 4px; }
+  .pc { border: .5px solid var(--b-border); border-radius: var(--b-r); background: #fff; padding: 4px 6px; }
+  .pc .tx { font-size: 11.5px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .pc .cd { float: right; margin-left: 4px; font-size: 10px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .pc .r2 { display: flex; align-items: center; gap: 2px; margin-top: 3px; }
+  .pc .chip { height: 16px; display: inline-flex; align-items: center; gap: 2px; border-radius: var(--b-r); padding: 0 4px; font-size: 10px; font-family: inherit; }
+  .pc .chip svg { width: 9px; height: 9px; }
+  .pc .end { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+  .pc .end .sa { width: 16px; height: 16px; font-size: 7px; }
+  .s-pub { background: #dcfce7; color: #15803d; } .s-sch { background: #dbeafe; color: #1d4ed8; }
+  .s-held { background: #ffedd5; color: #9a3412; } .s-red { background: #fee2e2; color: #b91c1c; } .s-draft { background: var(--b-muted); color: var(--b-mfg); }
+
+  /* Approvals table (pages/Approvals.tsx) */
+  .fw-appr { background: #fff; border: 1px solid var(--b-border); border-radius: var(--b-r); overflow: hidden; }
+  .fw-appr .tt { display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; background: hsl(40 18% 90% / .3); border-bottom: 1px solid var(--b-border); }
+  .fw-appr .tt h4 { font-family: inherit; font-size: 16px; font-weight: 500; letter-spacing: 0; }
+  .fw-appr .tr { display: grid; grid-template-columns: 140px minmax(0, 1fr) 150px; gap: 14px; align-items: center; padding: 11px 14px; border-bottom: 1px solid #e5e7eb; font-size: 13px; }
+  .fw-appr .tr:last-child { border-bottom: 0; }
+  .fw-appr .tr.h { padding: 7px 14px; background: hsl(40 18% 90% / .3); font-weight: 600; }
+  .fw-appr .acct { display: flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap; }
+  .fw-appr .acct .av { position: relative; width: 28px; height: 28px; border-radius: 50%; flex: none; display: grid; place-items: center; color: #fff; font-size: 10px; font-weight: 600; }
+  .fw-appr .acct .av svg { position: absolute; right: -3px; bottom: -3px; width: 14px; height: 14px; background: #fff; border-radius: 3px; padding: 1px; color: #0A66C2; }
+  .fw-appr .post { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .pill.held { border-color: #fdba74; color: #9a3412; }
+  .rem { border-radius: 999px; padding: 2px 10px; font-size: 13px; font-weight: 500; color: #fff; background: #800020; }
+  .fw-appr .bt.acc { height: 32px; padding: 0 12px; font-size: 13px; }
+
+  @media (max-width: 1020px) {
+    .fw-shell { grid-template-columns: 1fr; }
+    .fw-side { display: none; }
+    .fw-col:nth-child(3) { display: none; }
+  }
+  @media (max-width: 640px) {
+    .fw-col:nth-child(2) { display: none; }
+    .fw-radar { padding: 14px; }
+    .fw-bar .fw-dd.date { display: none; }
+    .fw-cal { overflow-x: auto; }
+    .fw-cal .wk, .fw-cal .fw-bar { min-width: 640px; }
+    .fw-appr .tr { grid-template-columns: 1fr auto; }
+    .fw-appr .tr > :nth-child(2) { display: none; }
+  }
+
   /* Reveal on scroll */
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.in { opacity: 1; transform: none; }
@@ -368,6 +528,52 @@
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <symbol id="i-signal" viewBox="0 0 512 512" fill="currentColor"><rect x="-86" y="-16" width="172" height="32" rx="8" transform="translate(237.228 256) scale(3.29208) rotate(57)"/><rect x="-20" y="-20" width="40" height="40" rx="7" transform="translate(380.799 162.764) scale(3.29208) rotate(-33)"/></symbol>
+<symbol id="l-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+<symbol id="l-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></symbol>
+<symbol id="l-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+<symbol id="l-message-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+<symbol id="l-calendar-days" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></symbol>
+<symbol id="l-chart-column" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+<symbol id="l-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="l-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></symbol>
+<symbol id="l-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+<symbol id="l-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+<symbol id="l-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="l-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+<symbol id="l-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+<symbol id="l-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+<symbol id="l-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="l-thumbs-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></symbol>
+<symbol id="l-message-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+<symbol id="l-repeat-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 3-3 3 3"/><path d="M13 18H7a2 2 0 0 1-2-2V6"/><path d="m22 15-3 3-3-3"/><path d="M11 6h6a2 2 0 0 1 2 2v10"/></symbol>
+<symbol id="l-ellipsis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol>
+<symbol id="l-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+<symbol id="l-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="l-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+<symbol id="l-pen-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></symbol>
+<symbol id="l-corner-up-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></symbol>
+<symbol id="l-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+<symbol id="l-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+<symbol id="l-rss" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></symbol>
+<symbol id="l-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+<symbol id="l-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+<symbol id="l-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="l-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h.01"/><path d="M3 18h.01"/><path d="M3 6h.01"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M8 6h13"/></symbol>
+<symbol id="l-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol>
+<symbol id="l-share-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></symbol>
+<symbol id="l-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="l-panel-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></symbol>
+<symbol id="l-chevrons-up-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></symbol>
+<symbol id="l-radar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/><path d="M12 18h.01"/><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/><circle cx="12" cy="12" r="2"/><path d="m13.41 10.59 5.66-5.66"/></symbol>
+<symbol id="l-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+<symbol id="l-rotate-cw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></symbol>
+<symbol id="l-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+<symbol id="l-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></symbol>
+<symbol id="l-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="p-li" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></symbol>
+<symbol id="p-x" viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.22-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></symbol>
+<symbol id="p-yt" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></symbol>
+<symbol id="p-fw" viewBox="0 0 23.018 22.667"><path d="M 4.448 1.186 C 9.412 -1.598 16.505 0.685 20.293 6.29 C 24.08 11.895 23.127 18.694 18.165 21.479 C 22.385 19.113 23.194 13.33 19.975 8.567 C 16.755 3.805 10.723 1.862 6.506 4.229 C 2.286 6.598 1.477 12.377 4.694 17.142 C 7.914 21.905 13.942 23.848 18.162 21.479 C 13.197 24.266 6.104 21.98 2.317 16.375 C -1.468 10.773 -0.515 3.971 4.447 1.186 Z" fill="currentColor"/><path d="M 8.139 2.988 C 12.206 0.705 18.019 2.578 21.119 7.168 C 24.222 11.761 23.441 17.331 19.374 19.616 C 22.831 17.676 23.494 12.938 20.856 9.037 C 18.221 5.137 13.278 3.543 9.823 5.482 C 6.366 7.422 5.703 12.16 8.341 16.064 C 10.979 19.967 15.919 21.558 19.376 19.616 C 15.309 21.899 9.496 20.028 6.396 15.435 C 3.293 10.844 4.074 5.269 8.141 2.989 L 8.139 2.988 Z" fill="currentColor"/><path d="M 13.85 2.805 C 18.161 3.076 22.11 6.822 22.666 11.172 C 23.22 15.522 20.176 18.827 15.864 18.559 C 19.53 18.789 22.117 15.979 21.646 12.28 C 21.173 8.582 17.82 5.398 14.155 5.168 C 10.489 4.938 7.898 7.748 8.372 11.446 C 8.846 15.146 12.202 18.329 15.864 18.559 C 11.553 18.287 7.608 14.541 7.051 10.191 C 6.494 5.841 9.539 2.536 13.853 2.805 Z" fill="currentColor"/><path d="M 18.374 4.564 C 21.785 6.612 23.394 10.776 21.974 13.863 C 20.549 16.949 16.632 17.791 13.221 15.743 C 16.121 17.483 19.452 16.769 20.661 14.145 C 21.871 11.521 20.501 7.983 17.601 6.24 C 14.701 4.5 11.371 5.215 10.162 7.84 C 8.952 10.463 10.32 14.001 13.222 15.741 C 9.812 13.694 8.202 9.529 9.625 6.443 C 11.049 3.356 14.966 2.513 18.377 4.561 Z" fill="currentColor"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-radar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/><path d="M12 18h.01"/><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/><circle cx="12" cy="12" r="2"/><path d="m13.41 10.59 5.66-5.66"/></symbol>
     <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.38 3.62a1 1 0 0 1 3 3L7.37 18.64a2 2 0 0 1-.86.5l-2.87.84a.5.5 0 0 1-.62-.62l.84-2.87a2 2 0 0 1 .5-.86z"/></symbol>
@@ -430,59 +636,33 @@
 
 <section class="morning">
   <div class="wrap">
-    <h2 class="h2 reveal"><b>Then it lands in one place.</b> Ranked, drafted and ready for your yes.</h2>
+    <h2 class="h2 reveal"><b>Then it lands in one place.</b> One radar for every source you follow.</h2>
   </div>
   <div class="wrap">
     <div class="app reveal">
-      <div class="app-chrome"><i></i><i></i><i></i><span class="mono">app.flywheelos.com/felix</span></div>
-      <div class="app-body">
-        <aside class="side">
-          <h6>Listening</h6>
-          <a class="on" href="#">Top signals <span class="n">24</span></a>
-          <a href="#">Keywords <span class="n">12</span></a>
-          <a href="#">Competitors <span class="n">5</span></a>
-          <a href="#">Mentions <span class="n">3</span></a>
-          <h6>Engage</h6>
-          <a href="#">Reply queue <span class="n">8</span></a>
-          <a href="#">Awaiting approval <span class="n">2</span></a>
-          <h6>Publish</h6>
-          <a href="#">Calendar</a>
-          <a href="#">Drafts <span class="n">6</span></a>
+      <div class="app-chrome"><i></i><i></i><i></i><span class="mono">app.flywheelos.com/projects/northbeam/content-radar</span></div>
+      <div class="fw fw-shell">
+        <aside class="fw-side">
+          <div class="fw-team"><svg class="bm"><use href="#p-fw"/></svg><b>Northbeam</b><svg class="i"><use href="#l-chevrons-up-down"/></svg></div>
+          <nav class="fw-nav">
+            <a><svg class="i"><use href="#l-lightbulb"/></svg>Ideation<svg class="i chev open"><use href="#l-chevron-right"/></svg></a>
+            <div class="fw-sub"><a>Idea Board</a><a class="on">Content Radar</a><a>Workflow Chat</a></div>
+            <a><svg class="i"><use href="#l-message-square"/></svg>Chat</a>
+            <a><svg class="i"><use href="#l-calendar-days"/></svg>Posts</a>
+            <a><svg class="i"><use href="#l-chart-column"/></svg>Analytics<svg class="i chev"><use href="#l-chevron-right"/></svg></a>
+            <a><svg class="i"><use href="#l-users"/></svg>Leads</a>
+            <a><svg class="i"><use href="#l-brain"/></svg>Knowledge Base</a>
+            <a><svg class="i"><use href="#l-layers"/></svg>Content Strategy</a>
+            <hr />
+            <a><svg class="i"><use href="#l-shield"/></svg>Approvals<span class="cnt">2</span></a>
+            <a><svg class="i"><use href="#l-bell"/></svg>Notifications<span class="cnt">5</span></a>
+          </nav>
+          <div class="fw-user"><span class="av">AS</span><div>Alex Saunders<small>alex@northbeam.io</small></div></div>
         </aside>
-        <div class="feed">
-          <div class="feed-head"><b>Top signals today</b><span class="chip">Sorted by relevance</span></div>
-          <div class="item on">
-            <div class="av b">JM</div>
-            <div><div class="who">Jordan Mills <em>Head of Growth, Northbeam</em> <span class="chip">LinkedIn</span></div>
-              <p>Anyone have a tool that actually tells you <mark>who is talking about your category</mark> before it trends? Tired of finding out a week late.</p></div>
-            <div class="score"><b>96</b>fit</div>
-          </div>
-          <div class="item">
-            <div class="av">HN</div>
-            <div><div class="who">Ask HN <em>214 points</em> <span class="chip">Hacker News</span></div>
-              <p>Comparing <mark>social listening</mark> options for a 10 person B2B team. What do you use?</p></div>
-            <div class="score"><b>91</b>fit</div>
-          </div>
-          <div class="item">
-            <div class="av c">AC</div>
-            <div><div class="who">Acme Analytics <em>Competitor</em> <span class="chip">X</span></div>
-              <p>Big news: we're launching our new listening dashboard next week.</p></div>
-            <div class="score"><b>84</b>fit</div>
-          </div>
-          <div class="item">
-            <div class="av b">TC</div>
-            <div><div class="who">TechCrunch <em>2h ago</em> <span class="chip">News</span></div>
-              <p>B2B buyers now research on LinkedIn before they ever book a demo, report finds.</p></div>
-            <div class="score"><b>78</b>fit</div>
-          </div>
-        </div>
-        <div class="draft">
-          <h5><svg width="14" height="14"><use href="#i-pen"/></svg> Reply to Jordan</h5>
-          <div class="step"><span class="ck"><svg width="10" height="10" style="color:#fff"><use href="#i-check"/></svg></span>Read the thread and 41 comments</div>
-          <div class="step"><span class="ck"><svg width="10" height="10" style="color:#fff"><use href="#i-check"/></svg></span>Matched to your voice profile</div>
-          <div class="step"><span class="ck idle"></span>Waiting for your approval</div>
-          <div class="bubble typing" id="typed"></div>
-          <div class="row-btns"><button class="mini dark">Approve and post</button><button class="mini">Edit</button></div>
+        <div class="fw-main">
+          <div class="fw-top"><svg class="i"><use href="#l-panel-left"/></svg><span class="mfg">Northbeam</span><span class="sep"><svg class="i14"><use href="#l-chevron-right"/></svg></span><span>Content Radar</span></div>
+          <div class="fw-bar"><span class="search"><svg class="i"><use href="#l-search"/></svg></span><span class="fw-dd">All Sources<svg class="i cd"><use href="#l-chevron-down"/></svg></span><span class="fw-dd date"><svg class="i"><use href="#l-calendar"/></svg>Last 7 Days<svg class="i cd"><use href="#l-chevron-down"/></svg></span></div>
+          <div class="fw-radar"><div class="fw-col"><div class="rc open"><h3><span>Jordan Mills</span><i class="more"><svg class="i"><use href="#l-ellipsis"/></svg></i></h3><div class="fw-menu"><div><svg class="i"><use href="#l-external-link"/></svg>Open Link</div><div class="hov"><svg class="i"><use href="#l-lightbulb"/></svg>Generate Idea</div><div><svg class="i"><use href="#l-bookmark"/></svg>Save to Inspiration</div><div><svg class="i"><use href="#l-repeat-2"/></svg>Quote repost</div></div><p>Anyone have a tool that actually tells you who is talking about your category before it trends? We keep finding out a week late, after the thread has already peaked.</p><div class="ft"><div class="src"><span class="sa" style="background:#4f46e5">JM</span><span>Jordan Mills</span></div><div class="mt"><span><svg class="i12"><use href="#l-thumbs-up"/></svg>212</span><span><svg class="i12"><use href="#l-message-circle"/></svg>48</span><span><svg class="i12"><use href="#l-repeat-2"/></svg>6</span><span>3h</span></div></div></div><div class="rc"><h3><span>Hacker News: Ask HN</span><i class="more"><svg class="i"><use href="#l-ellipsis"/></svg></i></h3><p>Ask HN: What do B2B teams use to keep up with what customers say about them online? Comparing a few options for a 10 person team.</p><div class="ft"><div class="src"><span class="sa"><svg class="i12" style="color:#f97316"><use href="#l-file-text"/></svg></span><span>Hacker News</span></div><div class="mt"><span>5h</span></div></div></div></div><div class="fw-col"><div class="rc comp"><h3><span>Acme Analytics</span><i class="more"><svg class="i"><use href="#l-ellipsis"/></svg></i></h3><p>Big news: our new listening dashboard ships next week. Every mention of your brand, scored and routed to the right person.</p><div class="ft"><div class="src"><span class="sa" style="background:#b45309">AA</span><span>Acme Analytics</span></div><div class="mt"><span><svg class="i12"><use href="#l-thumbs-up"/></svg>386</span><span><svg class="i12"><use href="#l-message-circle"/></svg>71</span><span><svg class="i12"><use href="#l-repeat-2"/></svg>22</span><span>1h</span></div></div></div><div class="rc"><h3><span>B2B buyers now research on LinkedIn before they book a demo</span><i class="more"><svg class="i"><use href="#l-ellipsis"/></svg></i></h3><p>A new survey of 1,200 buyers finds most shortlist vendors from what they read in their feed, long before they ever talk to sales.</p><span class="cat">B2B</span><span class="cat">Research</span><div class="ft"><div class="src"><span class="sa"><svg class="i12" style="color:#f97316"><use href="#l-file-text"/></svg></span><span>TechCrunch</span></div><div class="mt"><span>2h</span></div></div></div><div class="rc"><h3><span>Priya Kapoor</span><i class="more"><svg class="i"><use href="#l-ellipsis"/></svg></i></h3><p>Hot take: most B2B brands post on LinkedIn and never read the comments under anyone else's posts. That's where the buyers are.</p><div class="ft"><div class="src"><span class="sa" style="background:#0d9488">PK</span><span>Priya Kapoor</span></div><div class="mt"><span><svg class="i12"><use href="#l-thumbs-up"/></svg>1.2K</span><span><svg class="i12"><use href="#l-message-circle"/></svg>164</span><span><svg class="i12"><use href="#l-repeat-2"/></svg>41</span><span>6h</span></div></div></div></div><div class="fw-col"><div class="rc"><h3><span>How B2B teams turn comments into pipeline</span><i class="more"><svg class="i"><use href="#l-ellipsis"/></svg></i></h3><p>Lenny sits down with three heads of growth on why replies under other people's posts outperform their own posts.</p><div class="ft"><div class="src"><span class="sa"><svg class="i12" style="color:#ef4444"><use href="#p-yt"/></svg></span><span>Lenny's Podcast</span></div><div class="mt"><span>1d</span></div></div></div><div class="rc"><h3><span>Sam Okafor</span><i class="more"><svg class="i"><use href="#l-ellipsis"/></svg></i></h3><p>We stopped running a weekly 'what are people saying' meeting. The radar does it now and the team just picks what to answer.</p><div class="ft"><div class="src"><span class="sa" style="background:#7c3aed">SO</span><span>Sam Okafor</span></div><div class="mt"><span><svg class="i12"><use href="#l-thumbs-up"/></svg>640</span><span><svg class="i12"><use href="#l-message-circle"/></svg>92</span><span><svg class="i12"><use href="#l-repeat-2"/></svg>12</span><span>8h</span></div></div></div><div class="rc"><h3><span>Lumen</span><i class="more"><svg class="i"><use href="#l-ellipsis"/></svg></i></h3><p>We're hiring a Head of Content. Looking for someone who lives in the comments, not just the calendar.</p><div class="ft"><div class="src"><span class="sa" style="background:#0f766e">LU</span><span>Lumen</span></div><div class="mt"><span><svg class="i12"><use href="#l-thumbs-up"/></svg>118</span><span><svg class="i12"><use href="#l-message-circle"/></svg>9</span><span>1d</span></div></div></div></div></div>
         </div>
       </div>
     </div>
@@ -520,32 +700,56 @@
       <div class="panel on" data-panel="0">
         <div class="copy">
           <h3>Know what your market is saying before it trends.</h3>
-          <p>Track the words your buyers use, the competitors they compare you to and every mention of your brand.</p>
-          <ul><li>Keyword and boolean tracking</li><li>Competitor post monitoring</li><li>Spikes flagged as they happen</li></ul>
+          <p>Follow the people, competitors and publications your buyers read. LinkedIn profiles, RSS feeds and YouTube channels land in one radar.</p>
+          <ul><li>LinkedIn sources checked daily</li><li>Competitors flagged on sight</li><li>Turn any post into an idea</li></ul>
         </div>
-        <div class="mock">
-          <div class="mock-head">Tracking <span class="chip">Last 14 days</span></div>
-          <div class="kw"><span>"social listening"</span><span>"LinkedIn tool"</span><span>Acme Analytics</span><span>"B2B content"</span><span class="add">+ Add keyword</span></div>
-          <div style="padding:14px 16px 6px;display:flex;justify-content:space-between;align-items:baseline"><b style="font-weight:500;font-size:13px">Mentions</b><span class="mono muted">1,284 total, up 38%</span></div>
-          <div class="bars"><i style="height:30%"></i><i style="height:42%"></i><i style="height:35%"></i><i style="height:50%"></i><i style="height:46%"></i><i style="height:38%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:60%"></i><i style="height:52%"></i><i class="hi" style="height:96%"></i><i style="height:70%"></i><i style="height:64%"></i><i style="height:72%"></i></div>
+        <div class="mock fw">
+          <div class="fw-sources">
+            <div class="fw-bar"><span class="search"><svg class="i"><use href="#l-search"/></svg></span><span class="fw-dd" style="background:var(--b-muted)">All Sources<svg class="i cd"><use href="#l-chevron-down"/></svg></span><span class="fw-dd"><svg class="i"><use href="#l-calendar"/></svg>Last 7 Days<svg class="i cd"><use href="#l-chevron-down"/></svg></span></div>
+            <div class="fw-menu">
+              <div class="lbl">LINKEDIN</div>
+              <div><span class="sa" style="background:#4f46e5">JM</span>Jordan Mills</div>
+              <div class="hov"><span class="sa" style="background:#b45309">AA</span>Acme Analytics</div>
+              <div><span class="sa" style="background:#0d9488">PK</span>Priya Kapoor</div>
+              <div class="lbl">RSS FEEDS</div>
+              <div><span class="sa"><svg class="i12" style="color:#f97316"><use href="#l-file-text"/></svg></span>TechCrunch</div>
+              <div><span class="sa"><svg class="i12" style="color:#f97316"><use href="#l-file-text"/></svg></span>Hacker News</div>
+              <div class="lbl">YOUTUBE</div>
+              <div><span class="sa"><svg class="i12" style="color:#ef4444"><use href="#p-yt"/></svg></span>Lenny's Podcast</div>
+              <hr />
+              <div><svg class="i"><use href="#l-settings"/></svg>Manage Sources</div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Engage -->
       <div class="panel" data-panel="1">
         <div class="copy">
           <h3>Show up in the right threads, sounding like yourself.</h3>
-          <p>Felix picks the conversations worth joining and drafts a reply that matches your voice profile.</p>
-          <ul><li>Comment for reach on high-fit posts</li><li>Voice matched to your best posts</li><li>Approve, edit or skip in one click</li></ul>
+          <p>Every comment on your posts in one thread. Draft a reply with AI in your voice, edit it and send it without leaving the app.</p>
+          <ul><li>Draft replies with AI</li><li>Leads flagged in the thread</li><li>Auto-engagements after you publish</li></ul>
         </div>
-        <div class="mock">
-          <div class="post">
-            <div class="post-src"><div class="av b">PK</div><div><b style="font-weight:500">Priya Kapoor</b> <em>VP Marketing, Lumen</em></div><span class="chip" style="margin-left:auto">LinkedIn</span></div>
-            <div class="post-body">Hot take: most B2B brands post on LinkedIn and never read the comments under anyone else's posts. That's where the buyers are.</div>
-            <div class="reply">
-              <div class="voice"><span class="chip dark">Your voice</span><span class="chip">Direct</span><span class="chip">Short sentences</span><span class="chip">No hashtags</span></div>
-              <div class="bubble">Agree. We tracked it: our comments on other people's posts drove 3x the profile views our own posts did last quarter. Same effort, different room.</div>
-              <div class="row-btns"><button class="mini dark">Approve and post</button><button class="mini">Edit</button><button class="mini">Skip</button></div>
+        <div class="mock fw">
+          <div class="fw-thread">
+            <span class="back"><svg class="i14"><use href="#l-arrow-left"/></svg>Back to post</span>
+            <div class="meta">12 comments &middot; synced just now <svg class="i12"><use href="#l-rotate-cw"/></svg></div>
+            <div class="cm"><div class="rail"><span class="sa" style="background:#4f46e5">JM</span><i></i></div><div class="body">
+              <div class="who">Jordan Mills <span class="pill lead"><svg class="i12"><use href="#l-star"/></svg>Lead</span><span class="t">3h ago</span></div>
+              <div class="txt">We find out about category conversations a week late, every time. How are you catching them earlier?</div>
+              <div class="st"><span><svg class="i12"><use href="#l-heart"/></svg>24</span><span>1 reply</span></div>
+              <div class="acts"><button class="bt ghost xs"><svg class="i"><use href="#l-pen-line"/></svg>Draft reply</button><button class="bt ghost xs"><svg class="i"><use href="#l-corner-up-left"/></svg>Reply</button></div>
+            </div></div>
+            <div class="composer">
+              <div class="to"><span class="sa" style="background:#000">AS</span>Replying to <b>Jordan Mills</b> as <b>Alex Saunders</b></div>
+              <div class="box typing" id="typed"></div>
+              <div class="row"><button class="bt ghost xs"><svg class="i"><use href="#l-pen-line"/></svg>Draft with AI</button><span class="n numeric" id="typedCount">0 / 1250</span><button class="bt acc xs">Send reply</button></div>
             </div>
+            <div class="cm"><div class="rail"><span class="sa" style="background:#0d9488">PK</span><i></i></div><div class="body">
+              <div class="who">Priya Kapoor <span class="t">5h ago</span></div>
+              <div class="txt">The comments under other people's posts are where our pipeline comes from now. Great post.</div>
+              <div class="st"><span><svg class="i12"><use href="#l-heart"/></svg>41</span><span>1 reply</span></div>
+              <div class="who" style="margin-top:8px;font-weight:400"><span class="sa" style="background:#000">AS</span><b style="font-weight:500">Alex Saunders</b> replied <span class="pill sent">Sent &middot; 2h ago</span></div>
+            </div></div>
           </div>
         </div>
       </div>
@@ -554,24 +758,18 @@
         <div class="copy">
           <h3>One calendar for every channel.</h3>
           <p>Write once, schedule everywhere. Felix adapts each post to the network and holds it until it's approved.</p>
-          <ul><li>LinkedIn, X and Instagram in one view</li><li>Team and client approvals</li><li>Analytics on every post</li></ul>
+          <ul><li>Every account in one calendar</li><li>Team and client approvals</li><li>Analytics on every post</li></ul>
         </div>
-        <div class="mock">
-          <div class="mock-head">This week <span class="chip">5 scheduled</span></div>
-          <div class="cal">
-            <div><h6>Mon 20</h6><span class="slot dark"><b>09:00 LinkedIn</b>Why we stopped gating content</span></div>
-            <div><h6>Tue 21</h6><span class="slot"><b>11:30 X</b>Thread: 5 signals buyers give off</span><span class="slot line"><b>Awaiting approval</b>Client case study</span></div>
-            <div><h6>Wed 22</h6><span class="slot"><b>08:45 LinkedIn</b>Carousel: the listening stack</span></div>
-            <div><h6>Thu 23</h6><span class="slot dark"><b>12:00 LinkedIn</b>Carousel: the listening playbook</span></div>
-            <div><h6>Fri 24</h6><span class="slot"><b>10:00 LinkedIn</b>Weekly wins</span></div>
-          </div>
+        <div class="mock fw fw-cal">
+          <div class="fw-bar"><span class="month"><svg class="i"><use href="#l-chevron-left"/></svg>October <span class="mfg">2026</span><svg class="i"><use href="#l-chevron-right"/></svg></span><span class="views"><span>1 Week</span><span>2 Weeks</span><span>Month</span></span><button class="bt acc"><svg class="i"><use href="#l-plus"/></svg>New Post</button></div>
+          <div class="wk"><div class="hd">Sun</div><div class="hd">Mon</div><div class="hd">Tue</div><div class="hd">Wed</div><div class="hd">Thu</div><div class="hd">Fri</div><div class="hd">Sat</div><div class="day past"><span class="d numeric">25</span></div><div class="day past"><span class="d numeric">26</span><div class="pc"><div class="tx">Why we stopped gating our content</div><div class="r2"><span class="chip s-pub"><svg class="i"><use href="#l-send"/></svg></span><span class="end"><span class="sa" style="background:#000">AS</span><svg class="i12" style="color:#0A66C2"><use href="#p-li"/></svg></span></div></div></div><div class="day past"><span class="d numeric">27</span><div class="pc"><div class="tx">5 signals buyers give off before they reach out</div><div class="r2"><span class="chip s-pub"><svg class="i"><use href="#l-send"/></svg></span><span class="end"><span class="sa" style="background:#000">AS</span><svg class="i12"><use href="#p-x"/></svg></span></div></div><div class="pc"><div class="tx">The listening stack we run every morning</div><div class="r2"><span class="chip s-pub"><svg class="i"><use href="#l-send"/></svg></span><span class="end"><span class="sa" style="background:#57534e">PW</span><svg class="i12" style="color:#0A66C2"><use href="#p-li"/></svg></span></div></div></div><div class="day past"><span class="d numeric">28</span><div class="pc"><div class="tx">Comments beat posts: our Q3 numbers</div><div class="r2"><span class="chip s-pub"><svg class="i"><use href="#l-send"/></svg></span><span class="end"><span class="sa" style="background:#57534e">PW</span><svg class="i12" style="color:#0A66C2"><use href="#p-li"/></svg></span></div></div></div><div class="day "><span class="d numeric today">29</span><div class="pc"><div class="tx"><span class="cd" style="color:#1d4ed8">in 5h</span>Carousel: the listening playbook</div><div class="r2"><span class="chip s-sch"><svg class="i"><use href="#l-calendar-days"/></svg></span><span class="end"><span class="sa" style="background:#000">AS</span><svg class="i12" style="color:#0A66C2"><use href="#p-li"/></svg></span></div></div></div><div class="day "><span class="d numeric">30</span><div class="pc"><div class="tx"><span class="cd" style="color:#9a3412">approve in 3h</span>Client case study: how Lumen found 40 leads in the comments</div><div class="r2"><span class="chip s-held"><svg class="i"><use href="#l-shield"/></svg></span><span class="chip s-red"><svg class="i"><use href="#l-shield"/></svg>1/2</span><span class="end"><span class="sa" style="background:#57534e">PW</span><svg class="i12" style="color:#0A66C2"><use href="#p-li"/></svg></span></div></div><div class="pc"><div class="tx"><span class="cd" style="color:#1d4ed8">in 1d</span>Thread: what we learned from 1,000 replies</div><div class="r2"><span class="chip s-sch"><svg class="i"><use href="#l-calendar-days"/></svg></span><span class="end"><span class="sa" style="background:#000">AS</span><svg class="i12"><use href="#p-x"/></svg></span></div></div></div><div class="day "><span class="d numeric">31</span></div></div>
         </div>
       </div>
     </div>
 
     <div class="bullets">
       <div class="reveal"><h4><svg width="15" height="15"><use href="#i-zap"/></svg>Fast first reply</h4><p>Join a thread while it's still climbing, not a week later.</p></div>
-      <div class="reveal"><h4><svg width="15" height="15"><use href="#i-trend"/></svg>Highest fit first</h4><p>Signals are ranked by relevance, so the best ones sit on top.</p></div>
+      <div class="reveal"><h4><svg width="15" height="15"><use href="#i-trend"/></svg>Ideas from the feed</h4><p>Turn any post on the radar into an idea on your board in one click.</p></div>
       <div class="reveal"><h4><svg width="15" height="15"><use href="#i-msg"/></svg>Your voice, kept</h4><p>Drafts learn from what you've already written and what performed.</p></div>
       <div class="reveal"><h4><svg width="15" height="15"><use href="#i-bell"/></svg>Always on</h4><p>Listening runs around the clock, with alerts in Slack or email.</p></div>
     </div>
@@ -584,21 +782,19 @@
     <h2 class="h2 reveal"><b>Autopilot where it helps.</b> You stay in control of what gets said.</h2>
     <div class="split-grid">
       <div class="tile reveal">
-        <div><h3>Nothing posts without a yes</h3><p>Drafts wait for you or your client. Approve from the app, from Slack or by email.</p></div>
-        <div style="display:grid;gap:18px">
-          <span class="timer" id="timer">02:41</span>
-          <div class="approve">
-            <div class="meta"><span>Reply to Priya Kapoor</span><span class="chip">Pending</span></div>
-            <div style="font-size:13px;color:var(--ink-soft)">Agree. We tracked it: our comments on other people's posts drove 3x the profile views...</div>
-            <div class="row-btns"><button class="mini dark">Approve</button><button class="mini">Request changes</button></div>
-          </div>
+        <div><h3>Nothing posts without a yes</h3><p>Posts wait for you or your client. Set how many approvals a post needs, and it holds until it has them.</p></div>
+        <div class="fw fw-appr">
+          <div class="tt"><h4>Approvals</h4><span class="mfg" style="font-size:13px">2 awaiting review</span></div>
+          <div class="tr h"><span>Account</span><span>Post</span><span>Remaining</span></div>
+          <div class="tr"><span class="acct"><span class="av" style="background:#57534e">PW<svg><use href="#p-li"/></svg></span>Peter Wong</span><span class="post">Client case study: how Lumen found 40 leads in the comments</span><span style="display:flex;gap:8px;align-items:center"><span class="rem">1/2</span><button class="bt acc"><svg class="i12"><use href="#l-circle-check"/></svg>Approve</button></span></div>
+          <div class="tr"><span class="acct"><span class="av" style="background:#000">AS<svg><use href="#p-li"/></svg></span>Alex Saunders</span><span class="post">The 3 comments that booked us a demo this week</span><span style="display:flex;gap:8px;align-items:center"><span class="rem">0/1</span><button class="bt acc"><svg class="i12"><use href="#l-circle-check"/></svg>Approve</button></span></div>
         </div>
       </div>
       <div class="tile reveal">
         <div><h3>Alerts when it matters</h3><p>Felix flags the moments worth acting on, so you never miss a launch, a mention or a buyer asking for help.</p></div>
         <div class="alerts">
           <div class="alert"><span class="ic"><svg width="16" height="16"><use href="#i-zap"/></svg></span><div><b>Competitor launch</b><span>Acme Analytics announced a new dashboard</span></div><span class="mono muted">2m</span></div>
-          <div class="alert"><span class="ic"><svg width="16" height="16"><use href="#i-msg"/></svg></span><div><b>You were mentioned</b><span>r/SaaS thread recommends Flywheel</span></div><span class="mono muted">14m</span></div>
+          <div class="alert"><span class="ic"><svg width="16" height="16"><use href="#i-msg"/></svg></span><div><b>You were mentioned</b><span>Hacker News thread recommends Felix</span></div><span class="mono muted">14m</span></div>
           <div class="alert"><span class="ic"><svg width="16" height="16"><use href="#i-trend"/></svg></span><div><b>Topic is spiking</b><span>"LinkedIn comments" up 4x today</span></div><span class="mono muted">1h</span></div>
         </div>
       </div>
@@ -757,12 +953,14 @@
   }), { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-  // Typed reply in hero draft panel
-  const reply = "Same problem here, Jordan. We built Felix for exactly this: it flags category conversations the day they start, not the week after. Happy to show you how we set it up.";
+  // AI-drafted reply typing into the comments composer (Engage tab)
+  const reply = "Content Radar does the catching for us now. Every source we follow lands in one feed, so we see the thread the day it starts, not the week after. Happy to show you our setup.";
   const typed = document.getElementById('typed');
+  const typedCount = document.getElementById('typedCount');
   let i = 0;
   (function type() {
     typed.textContent = reply.slice(0, i++);
+    typedCount.textContent = typed.textContent.length + ' / 1250';
     if (i <= reply.length) setTimeout(type, 22);
     else setTimeout(() => { i = 0; type(); }, 4000);
   })();
@@ -775,13 +973,6 @@
     panels.forEach((p) => p.classList.toggle('on', p.dataset.panel === t.dataset.tab));
   }));
 
-  // Approval countdown
-  const timer = document.getElementById('timer');
-  let secs = 161;
-  setInterval(() => {
-    secs = secs <= 0 ? 161 : secs - 1;
-    timer.textContent = String(Math.floor(secs / 60)).padStart(2, '0') + ':' + String(secs % 60).padStart(2, '0');
-  }, 1000);
 
   // Testimonial marquee: duplicate cards for a seamless loop
   const track = document.getElementById('qtrack');
