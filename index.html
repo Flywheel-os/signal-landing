@@ -180,9 +180,9 @@
   .wave-wrap .card .ic { z-index: 1; }
   .card .ic { position: relative; }
   .card .ic::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; box-shadow: 0 0 0 1px var(--lapis); opacity: 0; }
-  .card .ic.hit { animation: icHit .9s ease-out; }
-  .card .ic.hit::after { animation: ring .9s ease-out; }
-  @keyframes icHit { 0% { background: var(--lapis); color: #fff; } 100% { background: #fff; color: var(--fg); } }
+  .card .ic.hit { animation: icHit 1.1s ease-out; }
+  .card .ic.hit::after { animation: ring 1.1s ease-out; }
+  @keyframes icHit { 0% { background: var(--lapis); color: #fff; } 35% { background: var(--lapis); color: #fff; } 100% { background: var(--paper); color: var(--fg); } }
   .cards4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
   .card { background: var(--card); border-radius: 16px; padding: 22px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; transition: background .2s, transform .2s; }
   .card:hover { background: var(--card-2); transform: translateY(-2px); }
@@ -1259,6 +1259,9 @@
       { amp: 11, k: 0.8, ph: 4.2, w: 0.5 },
     ];
     const TRAVEL_MS = 16000;
+    const PACKET_MS = 4200; // one packet crosses the full width in this time
+    const PACKET_EVERY = 4200; // and the next one leaves as it lands, so the beat never doubles up
+    let packets = [], nextPacket = 0;
     let W, H, midY, cardXs = [], parts = [], visible = false;
     const sprites = {};
     const sprite = (ch) => {
@@ -1285,7 +1288,6 @@
       p.off = (Math.random() + Math.random() + Math.random() - 1.5) / 1.5; // roughly bell-shaped across the strand
       p.kind = Math.random() < 0.3 ? "sq" : Math.random() < 0.5 ? "0" : "1";
       p.a = 0.18 + Math.random() * 0.4;
-      p.sig = p.st === 0 && Math.random() < 0.03;
       p.flash = 0;
       p.next = Math.random() * 1200;
     }
@@ -1314,6 +1316,7 @@
       const dt = Math.min(50, now - prev); prev = now;
       if (!visible || !W) return;
       ctx.clearRect(0, 0, W, H);
+      const strandY = (x, st) => midY + st.amp * Math.sin((x / W) * Math.PI * 2 * st.k * 1.5 + st.ph + now * 0.0006);
       for (const p of parts) {
         const x0 = p.u * W;
         if (!reduced) p.u += (dt * p.v) / TRAVEL_MS;
@@ -1332,22 +1335,36 @@
         const x = p.u * W;
         const y = midY + st.amp * Math.sin((x / W) * Math.PI * 2 * st.k * 1.5 + st.ph + now * 0.0006) + p.off * 7;
         const edge = smooth(0, 0.08, p.u) * (1 - smooth(0.92, 1, p.u));
-        if (p.sig) {
-          ctx.globalAlpha = 0.9 * edge;
-          ctx.fillStyle = "#0a28c8";
-          ctx.fillRect(x - 3.5, y - 3.5, 7, 7);
-          cardXs.forEach((cx, i) => { if (x0 < cx && x >= cx) ping(icons[i]); });
-          continue;
-        }
         const a = Math.min(1, p.a + p.flash * 0.6) * st.w * edge;
         if (a < 0.01) continue;
         ctx.globalAlpha = a;
         if (p.kind === "sq") { ctx.fillStyle = "#0d0d0d"; ctx.fillRect(x - 2.5, y - 2.5, 5, 5); }
         else ctx.drawImage(sprite(p.kind), x - 6, y - 6, 12, 12);
       }
+
+      if (!reduced) {
+        if (now >= nextPacket) { packets.push({ t0: now, prevX: -1 }); nextPacket = now + PACKET_EVERY; }
+        packets = packets.filter((k) => now - k.t0 < PACKET_MS);
+        for (const k of packets) {
+          const u = (now - k.t0) / PACKET_MS;
+          const x = u * W;
+          const edge = smooth(0, 0.06, u) * (1 - smooth(0.94, 1, u));
+          // short trail so it reads as moving, not blinking
+          for (let j = 4; j >= 0; j--) {
+            const tx = x - j * 9;
+            ctx.globalAlpha = edge * (j === 0 ? 1 : 0.32 * (1 - j / 5));
+            ctx.fillStyle = "#0a28c8";
+            const sz = j === 0 ? 8 : 6;
+            ctx.fillRect(tx - sz / 2, strandY(tx, STRANDS[0]) - sz / 2, sz, sz);
+          }
+          cardXs.forEach((cx, i) => { if (k.prevX < cx && x >= cx) ping(icons[i]); });
+          k.prevX = x;
+        }
+        ctx.globalAlpha = 1;
+      }
     }
 
-    new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) layout(); }).observe(wrap);
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) { layout(); packets = []; nextPacket = performance.now() + 400; } }).observe(wrap);
     addEventListener("resize", layout);
     if (document.fonts) document.fonts.ready.then(() => { for (const k in sprites) delete sprites[k]; layout(); });
     layout();
