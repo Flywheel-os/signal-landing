@@ -102,7 +102,6 @@
   .net.on svg { transform: scale(1.08); }
   .net.on span { color: var(--brand); }
   .net[aria-label="LinkedIn"] { --brand: #0A66C2; }
-  .net[aria-label="Reddit"] { --brand: #FF4500; }
   .net[aria-label="News"] { --brand: #D97706; }
   /* The last badge cycles through RSS sources to show the long tail */
   .net.cycle .cy { display: grid; place-items: center; font-style: normal; transition: opacity .2s, transform .2s; }
@@ -407,7 +406,7 @@
 <section class="hero" id="product">
   <canvas id="bits" aria-hidden="true"></canvas>
   <div class="wrap" style="text-align:center">
-    <span class="pulse-pill"><span class="dot"><i></i></span>Listening across LinkedIn, X, YouTube, podcasts, Substack, Instagram, Reddit and any RSS feed</span>
+    <span class="pulse-pill"><span class="dot"><i></i></span>Listening across LinkedIn, X, YouTube, Instagram, Substack, podcasts and any RSS feed</span>
     <h1 class="display">Hear every conversation about your market. <span class="hl">Join the right ones.</span></h1>
     <p class="lede">Felix watches your keywords, competitors and mentions, drafts replies in your voice and ships your posts on schedule.</p>
     <div class="ctas">
@@ -420,10 +419,8 @@
   <div class="net" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></div>
   <div class="net" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.22-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg><span>X</span></div>
   <div class="net" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg><span>YouTube</span></div>
-  <div class="net" aria-label="Podcasts" style="--brand:#9933CC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="1.4" fill="currentColor"/><path d="M11 17a1 1 0 0 1 2 0c0 .5-.34 3-.5 4.5a.5.5 0 0 1-1 0c-.16-1.5-.5-4-.5-4.5Z"/><path d="M8 14a5 5 0 1 1 8 0"/><path d="M17 18.5a9 9 0 1 0-10 0"/></svg><span>Podcasts</span></div>
   <div class="net" aria-label="Substack" style="--brand:#FF6719"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 7.6H3V5.2h18v2.4zM3 9.8V21l9-5 9 5V9.8H3zM21 1H3v2.4h18V1z"/></svg><span>Substack</span></div>
   <div class="net" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><path d="M17.5 6.5h.01"/></svg><span>Instagram</span></div>
-  <div class="net" aria-label="Reddit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14.5" rx="8" ry="5.5"/><circle cx="18" cy="4.5" r="1.5"/><path d="M12 9l1.5-5 3 .6"/><circle cx="4.6" cy="10.6" r="1.6"/><circle cx="19.4" cy="10.6" r="1.6"/><path d="M9.5 16.8c1.5 1 3.5 1 5 0"/><circle cx="9" cy="13.4" r=".6" fill="currentColor"/><circle cx="15" cy="13.4" r=".6" fill="currentColor"/></svg><span>Reddit</span></div>
   <div class="net cycle" aria-label="News"><i class="cy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></i><span>News</span></div>
   <div class="hub" id="hub" aria-label="Felix">
     <div class="hub-ring"></div>
@@ -461,8 +458,8 @@
             <div class="score"><b>96</b>fit</div>
           </div>
           <div class="item">
-            <div class="av">r/</div>
-            <div><div class="who">r/SaaS <em>214 upvotes</em> <span class="chip">Reddit</span></div>
+            <div class="av">HN</div>
+            <div><div class="who">Ask HN <em>214 points</em> <span class="chip">Hacker News</span></div>
               <p>Comparing <mark>social listening</mark> options for a 10 person B2B team. What do you use?</p></div>
             <div class="score"><b>91</b>fit</div>
           </div>
@@ -499,7 +496,7 @@
     <div class="wave-wrap">
     <canvas id="wave" aria-hidden="true"></canvas>
     <div class="cards4">
-      <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-radar"/></svg></span><div><span class="num">01</span><h3>Every source watched</h3><p>Keywords, competitors and mentions across LinkedIn, X, YouTube, Instagram, Reddit and any RSS feed, ranked by how much they matter to you.</p></div></div>
+      <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-radar"/></svg></span><div><span class="num">01</span><h3>Every source watched</h3><p>Keywords, competitors and mentions across LinkedIn, X, YouTube, Instagram and any RSS feed, ranked by how much they matter to you.</p></div></div>
       <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-pen"/></svg></span><div><span class="num">02</span><h3>Replies in your voice</h3><p>Felix drafts comments and replies that sound like you, trained on your past posts. You approve before anything goes out.</p></div></div>
       <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-cal"/></svg></span><div><span class="num">03</span><h3>Posts shipped on time</h3><p>Plan, schedule and cross-post from one calendar, with approvals for teams and clients built in.</p></div></div>
       <div class="card reveal"><span class="ic"><svg width="18" height="18"><use href="#i-trend"/></svg></span><div><span class="num">04</span><h3>Know what worked</h3><p>Reach, replies and engagement for every post and comment, so you can see which conversations were worth joining.</p></div></div>
@@ -557,7 +554,7 @@
         <div class="copy">
           <h3>One calendar for every channel.</h3>
           <p>Write once, schedule everywhere. Felix adapts each post to the network and holds it until it's approved.</p>
-          <ul><li>LinkedIn, X and Reddit in one view</li><li>Team and client approvals</li><li>Analytics on every post</li></ul>
+          <ul><li>LinkedIn, X and Instagram in one view</li><li>Team and client approvals</li><li>Analytics on every post</li></ul>
         </div>
         <div class="mock">
           <div class="mock-head">This week <span class="chip">5 scheduled</span></div>
@@ -565,7 +562,7 @@
             <div><h6>Mon 20</h6><span class="slot dark"><b>09:00 LinkedIn</b>Why we stopped gating content</span></div>
             <div><h6>Tue 21</h6><span class="slot"><b>11:30 X</b>Thread: 5 signals buyers give off</span><span class="slot line"><b>Awaiting approval</b>Client case study</span></div>
             <div><h6>Wed 22</h6><span class="slot"><b>08:45 LinkedIn</b>Carousel: the listening stack</span></div>
-            <div><h6>Thu 23</h6><span class="slot dark"><b>12:00 Reddit</b>AMA in r/marketing</span></div>
+            <div><h6>Thu 23</h6><span class="slot dark"><b>12:00 LinkedIn</b>Carousel: the listening playbook</span></div>
             <div><h6>Fri 24</h6><span class="slot"><b>10:00 LinkedIn</b>Weekly wins</span></div>
           </div>
         </div>
@@ -618,11 +615,9 @@
       <span class="src"><span class="ic" style="--brand:#000"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.22-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg></span>X</span>
       <span class="src"><span class="ic" style="--brand:#FF0000"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></span>YouTube</span>
       <span class="src"><span class="ic ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><path d="M17.5 6.5h.01"/></svg></span>Instagram</span>
-      <span class="src"><span class="ic" style="--brand:#FF4500"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14.5" rx="8" ry="5.5"/><circle cx="18" cy="4.5" r="1.5"/><path d="M12 9l1.5-5 3 .6"/><circle cx="4.6" cy="10.6" r="1.6"/><circle cx="19.4" cy="10.6" r="1.6"/><path d="M9.5 16.8c1.5 1 3.5 1 5 0"/><circle cx="9" cy="13.4" r=".6" fill="currentColor"/><circle cx="15" cy="13.4" r=".6" fill="currentColor"/></svg></span>Reddit</span>
       <span class="src"><span class="ic" style="--brand:#FF6719"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 8.24H1.46V5.41h21.08v2.83zM1.46 10.81V24L12 18.11 22.54 24V10.81H1.46zM22.54 0H1.46v2.84h21.08V0z"/></svg></span>Substack</span>
       <span class="src"><span class="ic" style="--brand:#000"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6.6" cy="12" r="6.2"/><ellipse cx="16.7" cy="12" rx="3.1" ry="5.8"/><ellipse cx="22" cy="12" rx="1.2" ry="5.2"/></svg></span>Medium</span>
       <span class="src"><span class="ic" style="--brand:#FF6600"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 5l5.5 8 5.5-8M12 13v6.5"/></svg></span>Hacker News</span>
-      <span class="src"><span class="ic" style="--brand:#0085FF"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8C10.9 8.6 7.9 4.6 5.1 2.7 2.4.8 1.4 1.1.7 1.4 0 1.8 0 3 0 3.7c0 .7.4 5.6.6 6.4.8 2.7 3.6 3.6 6.2 3.3-3.8.6-7.2 2-2.8 6.9 4.9 5 6.7-1.1 7.6-4.2.9 3.1 2 9 7.5 4.2 4.2-4.2 1.2-6.3-2.7-6.9 2.6.3 5.4-.6 6.2-3.3.2-.8.6-5.7.6-6.4 0-.7-.1-1.9-.8-2.3-.7-.3-1.7-.6-4.4 1.3C16.1 4.6 13.1 8.6 12 10.8z"/></svg></span>Bluesky</span>
       <span class="src"><span class="ic" style="--brand:#DA552F"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18.5v-13h4.2a3.6 3.6 0 0 1 0 7.2H9"/></svg></span>Product Hunt</span>
       <span class="src"><span class="ic" style="--brand:#9933CC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="11" r="1.4" fill="currentColor"/><path d="M11 17a1 1 0 0 1 2 0c0 .5-.34 3-.5 4.5a.5.5 0 0 1-1 0c-.16-1.5-.5-4-.5-4.5Z"/><path d="M8 14a5 5 0 1 1 8 0"/><path d="M17 18.5a9 9 0 1 0-10 0"/></svg></span>Podcasts</span>
       <span class="src"><span class="ic" style="--brand:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>News and blogs</span>
@@ -670,7 +665,7 @@
         <div class="price" data-m="149" data-a="119">$149<small> /mo</small></div>
         <ul>
           <li><svg width="13" height="13"><use href="#i-check"/></svg>Everything in Starter</li>
-          <li><svg width="13" height="13"><use href="#i-check"/></svg>YouTube, Instagram, Reddit and news</li>
+          <li><svg width="13" height="13"><use href="#i-check"/></svg>YouTube, Instagram and news</li>
           <li><svg width="13" height="13"><use href="#i-check"/></svg>Competitor monitoring</li>
           <li><svg width="13" height="13"><use href="#i-check"/></svg>Post and comment analytics</li>
           <li><svg width="13" height="13"><use href="#i-check"/></svg>Slack alerts and approvals</li>
@@ -708,7 +703,7 @@
   <div class="wrap faq">
     <header class="reveal"><h2 class="h2"><b>Questions, answered.</b></h2><p class="muted" style="margin-top:14px;max-width:340px">Can't find what you need? <a href="mailto:hello@flywheelos.com" style="color:var(--fg);text-decoration:underline">Email the team</a>.</p></header>
     <div class="reveal">
-      <details open><summary>Which networks does Felix listen to?<span class="pm"></span></summary><p>LinkedIn, X, YouTube, Instagram and Reddit, plus anything with an RSS feed: Substack, Medium, Hacker News, Bluesky, Product Hunt, podcasts, news sites and blogs. You can track keywords, specific accounts, competitors and mentions of your brand.</p></details>
+      <details open><summary>Which networks does Felix listen to?<span class="pm"></span></summary><p>LinkedIn, X, YouTube and Instagram, plus anything with an RSS feed: Substack, Medium, Hacker News, Product Hunt, podcasts, news sites and blogs. You can track keywords, specific accounts, competitors and mentions of your brand.</p></details>
       <details><summary>Can Felix reply on Substack, podcasts or news sites?<span class="pm"></span></summary><p>No. Feeds are listen-only. Felix reads them for competitor moves, brand mentions and trends, then turns what it finds into alerts and post ideas you can publish on your own social accounts.</p></details>
       <details><summary>Does Felix post or comment without asking me?<span class="pm"></span></summary><p>No. Every reply and post waits for approval by default. You can approve in the app, in Slack or by email, and agencies can send approval links to clients.</p></details>
       <details><summary>How does it learn my voice?<span class="pm"></span></summary><p>Felix reads your past posts and builds a voice profile: tone, sentence length, words you use and words you avoid. Drafts are written against that profile and get better as you edit them.</p></details>
@@ -802,7 +797,7 @@
   const ctx = cv.getContext("2d");
   const textBox = hero.querySelector(".wrap");
   const hub = document.getElementById("hub");
-  const badges = [...hero.querySelectorAll(".net")]; // LinkedIn, X, YouTube, Podcasts (left), Substack, Instagram, Reddit, cycling RSS (right)
+  const badges = [...hero.querySelectorAll(".net")]; // LinkedIn, X, YouTube (left), Substack, Instagram, cycling RSS (right)
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (matchMedia("(hover: none)").matches)
     document.getElementById("hintText").textContent =
@@ -819,7 +814,7 @@
     ["Reach play", 84],
   ];
   // Feed streams (Podcasts, Substack, the cycling RSS slot) are listen-only: no reply-style signals there.
-  const FEED_STREAMS = new Set([3, 4, 7]);
+  const FEED_STREAMS = new Set([3, 5]);
   const FEED_TYPES = [
     ["Competitor launch", 88],
     ["Brand mention", 94],
@@ -834,8 +829,8 @@
   const AMBIENT_SHARE = 0.08; // faint bits between the streams
   const HALO_SHARE = 0.4; // of stream bits, the share in the faint band around the strong core
   const CENTER_SHARE = 0.16; // faint stream down the middle, around the copy
-  // Brand colour per stream, in badge order: LinkedIn, X, YouTube, Instagram, Reddit, News.
-  const BRAND = ["#0A66C2", "#000000", "#FF0000", "#9933CC", "#FF6719", "#E1306C", "#FF4500", "#D97706"];
+  // Brand colour per stream, in badge order: LinkedIn, X, YouTube, Substack, Instagram, cycling RSS.
+  const BRAND = ["#0A66C2", "#000000", "#FF0000", "#FF6719", "#E1306C", "#D97706"];
   const INK = "#0d0d0d", LAPIS = "#0a28c8";
   const HUB_BOTTOM = 64 + 44; // .hub bottom offset + half its height
 
@@ -992,13 +987,13 @@
     const gStart = h1.width / 2 + 40 + band / 2,
       gEnd = Wb / 2 - band / 2 - 10;
     // Three streams a side, so the gutter needs room for two gaps of a band plus spacing.
-    inGutter = gEnd - gStart >= 3 * (band + 20);
+    inGutter = gEnd - gStart >= 2 * (band + 20);
     const offs = inGutter
-      ? [0, 1 / 3, 2 / 3, 1].map((k) => gStart + (gEnd - gStart) * k)
-      : [0.08, 0.2, 0.32, 0.44].map((k) => Wb * k);
+      ? [0, 1 / 2, 1].map((k) => gStart + (gEnd - gStart) * k)
+      : [0.1, 0.26, 0.42].map((k) => Wb * k);
     const inner = offs[0];
-    // Badge order: LinkedIn, X, YouTube, Podcasts (left, outer to inner), then Substack, Instagram, Reddit, RSS (right, inner to outer).
-    streams = [cx - offs[3], cx - offs[2], cx - offs[1], cx - offs[0], cx + offs[0], cx + offs[1], cx + offs[2], cx + offs[3]];
+    // Badge order: LinkedIn, X, YouTube (left, outer to inner), then Substack, Instagram, RSS (right, inner to outer).
+    streams = [cx - offs[2], cx - offs[1], cx - offs[0], cx + offs[0], cx + offs[1], cx + offs[2]];
     // The central stream fills the space between the inner streams' halos.
     centerHalf = Math.max(COL * 3, inner - band / 2 - haloCols * COL);
 
@@ -1218,7 +1213,7 @@
   addEventListener("resize", layout);
 
   // The last badge cycles through RSS sources so the hero shows the long tail, not just six networks.
-  const CYCLE = [["News","#D97706","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2\"/><path d=\"M18 14h-8M15 18h-5M10 6h8v4h-8z\"/></svg>"],["Hacker News","#FF6600","<svg viewBox=\"0 0 24 24\"><rect x=\"2\" y=\"2\" width=\"20\" height=\"20\" rx=\"3\" fill=\"currentColor\"/><path d=\"M7.5 6.5l4.5 6.5 4.5-6.5M12 13v5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["Medium","#000000","<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"6.6\" cy=\"12\" r=\"6.2\"/><ellipse cx=\"16.7\" cy=\"12\" rx=\"3.1\" ry=\"5.8\"/><ellipse cx=\"22\" cy=\"12\" rx=\"1.2\" ry=\"5.2\"/></svg>"],["Bluesky","#0085FF","<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 10.8C10.9 8.6 7.9 4.6 5.1 2.7 2.4.8 1.4 1.1.7 1.4 0 1.8 0 3 0 3.7c0 .7.4 5.6.6 6.4.8 2.7 3.6 3.6 6.2 3.3-3.8.6-7.2 2-2.8 6.9 4.9 5 6.7-1.1 7.6-4.2.9 3.1 2 9 7.5 4.2 4.2-4.2 1.2-6.3-2.7-6.9 2.6.3 5.4-.6 6.2-3.3.2-.8.6-5.7.6-6.4 0-.7-.1-1.9-.8-2.3-.7-.3-1.7-.6-4.4 1.3C16.1 4.6 13.1 8.6 12 10.8z\"/></svg>"],["Product Hunt","#DA552F","<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10.5\" fill=\"currentColor\"/><path d=\"M9.6 17v-10h3.4a3 3 0 0 1 0 6H9.6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["RSS feeds","#F26522","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11a9 9 0 0 1 9 9\"/><path d=\"M4 4a16 16 0 0 1 16 16\"/><circle cx=\"5\" cy=\"19\" r=\"1.2\" fill=\"currentColor\"/></svg>"]];
+  const CYCLE = [["News","#D97706","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2\"/><path d=\"M18 14h-8M15 18h-5M10 6h8v4h-8z\"/></svg>"],["Podcasts","#9933CC","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"11\" r=\"1.4\" fill=\"currentColor\"/><path d=\"M11 17a1 1 0 0 1 2 0c0 .5-.34 3-.5 4.5a.5.5 0 0 1-1 0c-.16-1.5-.5-4-.5-4.5Z\"/><path d=\"M8 14a5 5 0 1 1 8 0\"/><path d=\"M17 18.5a9 9 0 1 0-10 0\"/></svg>"],["Hacker News","#FF6600","<svg viewBox=\"0 0 24 24\"><rect x=\"2\" y=\"2\" width=\"20\" height=\"20\" rx=\"3\" fill=\"currentColor\"/><path d=\"M7.5 6.5l4.5 6.5 4.5-6.5M12 13v5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["Medium","#000000","<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"6.6\" cy=\"12\" r=\"6.2\"/><ellipse cx=\"16.7\" cy=\"12\" rx=\"3.1\" ry=\"5.8\"/><ellipse cx=\"22\" cy=\"12\" rx=\"1.2\" ry=\"5.2\"/></svg>"],["Product Hunt","#DA552F","<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10.5\" fill=\"currentColor\"/><path d=\"M9.6 17v-10h3.4a3 3 0 0 1 0 6H9.6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"],["RSS feeds","#F26522","<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11a9 9 0 0 1 9 9\"/><path d=\"M4 4a16 16 0 0 1 16 16\"/><circle cx=\"5\" cy=\"19\" r=\"1.2\" fill=\"currentColor\"/></svg>"]];
   const cycler = hero.querySelector(".net.cycle");
   let cycleAt = 0;
   if (cycler && !reduced)
