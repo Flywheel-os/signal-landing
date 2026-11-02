@@ -71,6 +71,8 @@
   .logo-mark { width: 26px; height: 26px; border-radius: 8px; background: var(--lapis); display: grid; place-items: center; }
   .logo-mark rect { transition: translate .35s ease; }
   .logo:hover .logo-mark rect:last-child { translate: 22px -14px; }
+  .logo-words { display: flex; flex-direction: column; line-height: 1; }
+  .logo-words .endorse { margin-top: 3px; font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0; color: var(--muted); }
   .logo small { font-family: var(--sans); font-weight: 400; font-size: 13px; color: var(--muted); letter-spacing: 0; }
   .links { display: flex; gap: 26px; font-size: 14px; color: var(--muted); }
   .links a:hover { color: var(--fg); }
@@ -595,7 +597,7 @@
   <div class="bar">
     <a href="#" class="logo">
       <span class="logo-mark"><svg width="18" height="18" viewBox="0 0 512 512" fill="#fff" aria-hidden="true"><rect x="-86" y="-16" width="172" height="32" rx="8" transform="translate(237.228 256) scale(3.29208) rotate(57)"/><rect x="-20" y="-20" width="40" height="40" rx="7" transform="translate(380.799 162.764) scale(3.29208) rotate(-33)"/></svg></span>
-      Felix
+      <span class="logo-words">Felix<span class="endorse">by Flywheel</span></span>
     </a>
     <div class="links">
       <a href="#product">Product</a>

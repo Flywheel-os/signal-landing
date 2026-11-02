@@ -1,9 +1,9 @@
 # Felix by Flywheel: landing page
 
-Static landing page for Felix (formerly Signal), served at https://signal.flywheelos.com via GitHub Pages.
+Static landing page for Felix (formerly Signal), served at https://felix.flywheelos.com via GitHub Pages.
 
 - Everything lives in `index.html` (no build step). Push to `main` and Pages redeploys.
-- `CNAME` sets the custom domain. DNS: `signal` CNAME to `flywheel-os.github.io` in GoDaddy.
+- `CNAME` sets the custom domain. DNS: `felix` CNAME to `flywheel-os.github.io` in GoDaddy.
 
 ## Before launch
 
