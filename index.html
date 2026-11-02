@@ -71,8 +71,8 @@
   .logo-mark { width: 26px; height: 26px; border-radius: 8px; background: var(--lapis); display: grid; place-items: center; }
   .logo-mark rect { transition: translate .35s ease; }
   .logo:hover .logo-mark rect:last-child { translate: 22px -14px; }
-  .logo-words { display: flex; flex-direction: column; line-height: 1; }
-  .logo-words .endorse { margin-top: 3px; font-family: var(--sans); font-weight: 400; font-size: 11px; letter-spacing: 0; color: var(--muted); }
+  .logo-words { position: relative; line-height: 1; }
+  .logo-words .endorse { position: absolute; left: 1px; top: 100%; margin-top: 1px; white-space: nowrap; font-family: var(--sans); font-weight: 400; font-size: 9px; letter-spacing: 0; color: var(--muted); }
   .logo small { font-family: var(--sans); font-weight: 400; font-size: 13px; color: var(--muted); letter-spacing: 0; }
   .links { display: flex; gap: 26px; font-size: 14px; color: var(--muted); }
   .links a:hover { color: var(--fg); }
